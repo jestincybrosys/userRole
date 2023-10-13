@@ -128,35 +128,34 @@ function edit_roles_page() {
     }
     ?>
     <div class="wrap">
-    <h2>Edit User Role Capabilities</h2>
-    <form method="post" action="">
-    <label for="role_name">Select Role to Edit:</label>
-    <select id="role_name" name="role_name">
-        <?php
-        foreach ($roles as $role_name => $role_info) {
-            $selected = ($role_name === $selected_role) ? 'selected' : '';
-            echo '<option value="' . esc_attr($role_name) . '" ' . $selected . '>' . esc_html($role_info['name']) . '</option>';
-        }x
-        ?>
-    </select>
+        <h2>Edit User Role Capabilities</h2>
+        <form method="post" action="">
+            <label for="role_name">Select Role to Edit:</label>
+            <select id="role_name" name="role_name">
+                <?php
+                foreach ($roles as $role_name => $role_info) {
+                    $selected = ($role_name === $selected_role) ? 'selected' : '';
+                    echo '<option value="' . esc_attr($role_name) . '" ' . $selected . '>' . esc_html($role_info['name']) . '</option>';
+                }
+                ?>
+            </select>
 
-    <h3>Current Role Capabilities</h3>
-<div id="current-capabilities">
-    <!-- The capabilities for the selected user role will be loaded here via AJAX -->
-</div>
- 
+            <h3>Current Role Capabilities</h3>
+            <div id="current-capabilities">
+                <!-- The capabilities for the selected user role will be loaded here via AJAX -->
+            </div>
 
-        <h3>All Capabilities</h3>
-        <div id="all-capabilities">
-            <!-- Display all capabilities here -->
-        </div>
+            <h3>All Capabilities</h3>
+            <div id="all-capabilities">
+                <!-- Display all capabilities here -->
+            </div>
 
-        <input type="submit" name="update_role_capabilities" class="button button-primary" value="Update Role Capabilities">
-    </form>
-</div>
-
+            <input type="submit" name="update_role_capabilities" class="button button-primary" value="Update Role Capabilities">
+        </form>
+    </div>
     <?php
 }
+
 
 
 
@@ -164,6 +163,7 @@ function edit_roles_page() {
 add_action('wp_ajax_load_capabilities', 'load_capabilities_callback');
 add_action('wp_ajax_nopriv_load_capabilities', 'load_capabilities_callback');
 
+// Callback function for loading capabilities
 function load_capabilities_callback() {
     if (isset($_POST['role_name'])) {
         $role_name = sanitize_text_field($_POST['role_name']);
@@ -171,14 +171,12 @@ function load_capabilities_callback() {
 
         ob_start();
 
-        foreach ($all_capabilities as $cap => $value) {
-            $checked = (isset($role->capabilities[$cap])) ? 'checked' : '';
-            ?>
-            <label style="width: 200px;">
-                <input type="checkbox" name="capabilities[]" value="<?php echo $cap; ?>" <?php echo $checked; ?>>
-                <?php echo $cap; ?>
-            </label><br>
-            <?php
+        // List the capabilities of the selected role
+        foreach ($role->capabilities as $capability => $value) {
+            echo '<label style="width: 200px;">';
+            echo '<input type="checkbox" name="capabilities[]" value="' . $capability . '" checked>';
+            echo $capability;
+            echo '</label><br>';
         }
 
         $response = ob_get_clean();
@@ -187,6 +185,7 @@ function load_capabilities_callback() {
 
     wp_die(); // Always use wp_die() at the end of AJAX callbacks.
 }
+
 
 // Callback function to display existing roles
 function existing_roles_page() {

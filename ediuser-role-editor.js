@@ -1,6 +1,7 @@
 jQuery(document).ready(function($) {
     $('#role_name').change(function() {
         var selectedRole = $(this).val();
+
         $.post(ajaxurl, {
             action: 'load_capabilities',
             role_name: selectedRole
@@ -12,6 +13,7 @@ jQuery(document).ready(function($) {
     // Trigger the change event when the page loads to initially load the capabilities
     $('#role_name').trigger('change');
 });
+
 
 
 function checkCapabilities() {
