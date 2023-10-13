@@ -43,8 +43,8 @@ function enqueue_ediuser_role_editor_styles() {
     if ($current_screen && $current_screen->id === 'toplevel_page_ediuser-role-editor') {
         // We are on the plugin page, enqueue the styles
         wp_enqueue_style('ediuser-role-editor-styles', plugins_url('ediuser-role-editor.css', __FILE__));
-        wp_enqueue_script('ediuser-role-editor', plugins_url('ediuser-role-editor.js', __FILE__), array('jquery'), null, true);
-    }
+    }        wp_enqueue_script('ediuser-role-editor', plugins_url('ediuser-role-editor.js', __FILE__), array('jquery'), null, true);
+
 }
 add_action('admin_enqueue_scripts', 'enqueue_ediuser_role_editor_styles');
 
