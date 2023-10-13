@@ -32,10 +32,19 @@ function checkCapabilities() {
 
 
 jQuery(document).ready(function($) {
-    // Show/hide additional capabilities when "Load More" is clicked
-    $('.load-more-link').on('click', function() {
-        var capabilitiesList = $(this).siblings('.capabilities-list');
-        capabilitiesList.find('.hidden-capability').show();
-        $(this).remove(); // Remove the "Load More" link
+    // Hide additional capabilities and show "Load More" link
+    $('.capabilities-list').each(function() {
+        var capabilities = $(this).children('.hidden-capability');
+        capabilities.hide();
+        if (capabilities.length > 0) {
+            $(this).next('.load-more-link').show();
+        }
+    });
+
+    // Show additional capabilities when "Load More" is clicked
+    $('.load-more-link').on('click', function(e) {
+        e.preventDefault();
+        $(this).prev('.capabilities-list').children('.hidden-capability').show();
+        $(this).hide();
     });
 });

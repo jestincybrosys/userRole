@@ -36,15 +36,28 @@ function ediuser_role_editor_menu() {
     );
 }
 add_action('admin_menu', 'ediuser_role_editor_menu');
-function enqueue_ediuser_role_editor_styles() {
-    // Check if we are on the plugin page
 
-        // We are on the plugin page, enqueue the styles
+function enqueue_ediuser_role_editor_styles() {
+    $current_page = isset($_GET['page']) ? $_GET['page'] : '';
+
+    // Check if we are on the main plugin page or any of its submenus
+    if (
+        $current_page === 'ediuser-role-editor' ||
+        $current_page === 'edit-roles' ||
+        $current_page === 'existing-role-capabilities'
+    ) {
+        // Get the plugin directory path
+        $plugin_dir = plugin_dir_path(__FILE__);
+
+        // Enqueue styles
         wp_enqueue_style('ediuser-role-editor-styles', plugins_url('ediuser-role-editor.css', __FILE__));
     
-    wp_enqueue_script('ediuser-role-editor', plugins_url('ediuser-role-editor.js', __FILE__), array('jquery'), null, true);
+        // Enqueue scripts with dependencies on jQuery
+        wp_enqueue_script('ediuser-role-editor', plugins_url('ediuser-role-editor.js', __FILE__), array('jquery'), null, true);
+    }
 }
 add_action('admin_enqueue_scripts', 'enqueue_ediuser_role_editor_styles');
+
 
 
 function ediuser_role_editor_page() {
@@ -210,63 +223,7 @@ function update_role_capabilities_callback() {
     wp_die(); // Always use wp_die() at the end of AJAX callbacks.
 }
 
-
-
-// Callback function to display existing roles
-function existing_roles_page() {
-    $wp_roles = wp_roles();
-    ?>
-    <div class="wrap">
-        <h2>Existing User Roles and Capabilities</h2>
-        <table class="widefat">
-            <thead>
-                <tr>
-                    <th>Role</th>
-                    <th>Capabilities</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                foreach ($wp_roles->role_objects as $role_name => $role) {
-                    $capabilities = $role->capabilities;
-                    echo '<tr>';
-                    echo '<td>' . $role_name . '</td>';
-                    echo '<td>';
-                    // Wrap capabilities in a div for show/hide
-                    echo '<div class="capabilities-list">';
-                    $capabilityKeys = array_keys($capabilities);
-                    for ($i = 0; $i < count($capabilityKeys); $i++) {
-                        if ($i >= 10) {
-                            echo '<span class="hidden-capability">' . $capabilityKeys[$i] . '</span>';
-                        } else {
-                            echo '<span>' . $capabilityKeys[$i] . '</span>';
-                        }
-                    }
-                    echo '</div>';
-                    // Add "Load More" link if there are more than 10 capabilities
-                    if (count($capabilityKeys) > 10) {
-                        echo '<a class="load-more-link" href="#">Load More</a>';
-                    }
-                    echo '</td>';
-                    echo '</tr>';
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- <script>
-        jQuery(document).ready(function($) {
-            // Show/hide additional capabilities when "Load More" is clicked
-            $('.load-more-link').on('click', function() {
-                var capabilitiesList = $(this).siblings('.capabilities-list');
-                capabilitiesList.find('.hidden-capability').show();
-                $(this).remove(); // Remove the "Load More" link
-            });
-        });
-    </script> -->
-    <?php
-}
+ 
 
 
 function existing_role_capabilities_page() {
@@ -310,25 +267,5 @@ function existing_role_capabilities_page() {
             </tbody>
         </table>
     </div>
-
-    <script>
-        jQuery(document).ready(function($) {
-            // Hide additional capabilities and show "Load More" link
-            $('.capabilities-list').each(function() {
-                var capabilities = $(this).children('.hidden-capability');
-                capabilities.hide();
-                if (capabilities.length > 0) {
-                    $(this).next('.load-more-link').show();
-                }
-            });
-
-            // Show additional capabilities when "Load More" is clicked
-            $('.load-more-link').on('click', function(e) {
-                e.preventDefault();
-                $(this).prev('.capabilities-list').children('.hidden-capability').show();
-                $(this).hide();
-            });
-        });
-    </script>
     <?php
 }
