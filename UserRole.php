@@ -9,8 +9,8 @@ Author: jestin joseph
 // Add a menu item for the ediuser role editor
 function ediuser_role_editor_menu() {
     add_menu_page(
-        'ediuser Role Editor',
-        'ediuser Roles',
+        'Ediuser Role Editor',
+        'Ediuser: User Roles',
         'manage_options',
         'ediuser-role-editor',
         'ediuser_role_editor_page'
@@ -144,7 +144,7 @@ function edit_roles_page() {
 <div id="current-capabilities">
     <!-- The capabilities for the selected user role will be loaded here via AJAX -->
 </div>
-
+ 
 
         <h3>All Capabilities</h3>
         <div id="all-capabilities">
