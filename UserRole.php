@@ -163,28 +163,30 @@ function edit_roles_page() {
 add_action('wp_ajax_load_capabilities', 'load_capabilities_callback');
 add_action('wp_ajax_nopriv_load_capabilities', 'load_capabilities_callback');
 
-// Callback function for loading capabilities
 function load_capabilities_callback() {
     if (isset($_POST['role_name'])) {
         $role_name = sanitize_text_field($_POST['role_name']);
         $role = get_role($role_name);
+        $all_capabilities = get_role('administrator')->capabilities; // Use admin capabilities as a reference.
 
         ob_start();
 
-        // List the capabilities of the selected role
-        foreach ($role->capabilities as $capability => $value) {
-            echo '<label style="width: 200px;">';
-            echo '<input type="checkbox" name="capabilities[]" value="' . $capability . '" checked>';
-            echo $capability;
-            echo '</label><br>';
+        foreach ($all_capabilities as $cap => $value) {
+            $checked = (isset($role->capabilities[$cap])) ? 'checked' : ''; // Check if the capability is present in the user role
+            ?>
+            <label style="width: 200px;">
+                <input type="checkbox" name="capabilities[]" value="<?php echo $cap; ?>" <?php echo $checked; ?>>
+                <?php echo $cap; ?>
+            </label><br>
+            <?php
         }
-
         $response = ob_get_clean();
         echo $response;
     }
 
     wp_die(); // Always use wp_die() at the end of AJAX callbacks.
 }
+
 
 
 // Callback function to display existing roles
