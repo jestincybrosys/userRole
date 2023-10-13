@@ -97,6 +97,8 @@ function ediuser_role_editor_page() {
     <?php
 }
 
+
+
 function edit_roles_page() {
     $roles = get_editable_roles();
     $selected_role = "administrator"; // Default role
@@ -153,8 +155,12 @@ function edit_roles_page() {
             <input type="submit" name="update_role_capabilities" class="button button-primary" value="Update Role Capabilities">
         </form>
     </div>
+
+
     <?php
+    // ...
 }
+
 
 
 
@@ -182,6 +188,29 @@ function load_capabilities_callback() {
         }
         $response = ob_get_clean();
         echo $response;
+    }
+
+    wp_die(); // Always use wp_die() at the end of AJAX callbacks.
+}
+
+
+add_action('wp_ajax_update_role_capabilities', 'update_role_capabilities_callback');
+
+function update_role_capabilities_callback() {
+    if (isset($_POST['role_name']) && isset($_POST['capabilities'])) {
+        $role_name = sanitize_text_field($_POST['role_name']);
+        $selected_capabilities = $_POST['capabilities'];
+
+        // Update the role's capabilities
+        $role = get_role($role_name);
+        $role->capabilities = array();
+
+        foreach ($selected_capabilities as $capability) {
+            $role->add_cap($capability);
+        }
+
+        // Respond with a success message if needed
+        echo 'Role capabilities updated successfully.';
     }
 
     wp_die(); // Always use wp_die() at the end of AJAX callbacks.
