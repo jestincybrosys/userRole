@@ -255,7 +255,7 @@ function existing_roles_page() {
         </table>
     </div>
 
-    <script>
+    <!-- <script>
         jQuery(document).ready(function($) {
             // Show/hide additional capabilities when "Load More" is clicked
             $('.load-more-link').on('click', function() {
@@ -264,7 +264,7 @@ function existing_roles_page() {
                 $(this).remove(); // Remove the "Load More" link
             });
         });
-    </script>
+    </script> -->
     <?php
 }
 

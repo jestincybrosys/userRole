@@ -29,3 +29,13 @@ function checkCapabilities() {
         allCapabilities.filter('[value="' + capabilityName + '"]').prop('checked', true);
     });
 }
+
+
+jQuery(document).ready(function($) {
+    // Show/hide additional capabilities when "Load More" is clicked
+    $('.load-more-link').on('click', function() {
+        var capabilitiesList = $(this).siblings('.capabilities-list');
+        capabilitiesList.find('.hidden-capability').show();
+        $(this).remove(); // Remove the "Load More" link
+    });
+});
