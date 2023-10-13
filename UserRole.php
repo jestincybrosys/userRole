@@ -6,19 +6,19 @@ Version: 1.0
 Author: jestin joseph
 */
 
-// Add a menu item for the custom role editor
-function custom_role_editor_menu() {
+// Add a menu item for the ediuser role editor
+function ediuser_role_editor_menu() {
     add_menu_page(
-        'Custom Role Editor',
-        'Custom Roles',
+        'ediuser Role Editor',
+        'ediuser Roles',
         'manage_options',
-        'custom-role-editor',
-        'custom_role_editor_page'
+        'ediuser-role-editor',
+        'ediuser_role_editor_page'
     );
 
     // Add a sub-menu item to display existing roles
     add_submenu_page(
-        'custom-role-editor',    // Parent menu slug
+        'ediuser-role-editor',    // Parent menu slug
         'Edit Roles',            // Page title
         'Edit Roles',            // Menu title
         'manage_options',        // Capability
@@ -27,7 +27,7 @@ function custom_role_editor_menu() {
     );
 
     add_submenu_page(
-        'custom-role-editor',
+        'ediuser-role-editor',
         'Existing Role Capabilities',
         'Role Capabilities',
         'manage_options',
@@ -35,22 +35,22 @@ function custom_role_editor_menu() {
         'existing_role_capabilities_page'
     );
 }
-add_action('admin_menu', 'custom_role_editor_menu');
-function enqueue_custom_role_editor_styles() {
+add_action('admin_menu', 'ediuser_role_editor_menu');
+function enqueue_ediuser_role_editor_styles() {
     // Check if we are on the plugin page
     $current_screen = get_current_screen();
 
-    if ($current_screen && $current_screen->id === 'toplevel_page_custom-role-editor') {
+    if ($current_screen && $current_screen->id === 'toplevel_page_ediuser-role-editor') {
         // We are on the plugin page, enqueue the styles
-        wp_enqueue_style('custom-role-editor-styles', plugins_url('custom-role-editor.css', __FILE__));
-        wp_enqueue_script('custom-role-editor', plugins_url('custom-role-editor.js', __FILE__), array('jquery'), null, true);
+        wp_enqueue_style('ediuser-role-editor-styles', plugins_url('ediuser-role-editor.css', __FILE__));
+        wp_enqueue_script('ediuser-role-editor', plugins_url('ediuser-role-editor.js', __FILE__), array('jquery'), null, true);
     }
 }
-add_action('admin_enqueue_scripts', 'enqueue_custom_role_editor_styles');
+add_action('admin_enqueue_scripts', 'enqueue_ediuser_role_editor_styles');
 
 
-function custom_role_editor_page() {
-    if (isset($_POST['create_custom_role'])) {
+function ediuser_role_editor_page() {
+    if (isset($_POST['create_ediuser_role'])) {
         $role_name = sanitize_text_field($_POST['role_name']);
         $selected_capabilities = isset($_POST['capabilities']) ? $_POST['capabilities'] : array();
         
@@ -67,9 +67,9 @@ function custom_role_editor_page() {
             }
         }
 
-        // Create the custom role.
+        // Create the ediuser role.
         add_role($role_name, $role_name, $role_capabilities);
-        echo '<div class="updated"><p>Custom role created successfully.</p></div>';
+        echo '<div class="updated"><p>ediuser role created successfully.</p></div>';
     }
     ?>
     <div class="wrap">
@@ -91,7 +91,7 @@ function custom_role_editor_page() {
             }
             ?>
             
-            <input type="submit" name="create_custom_role" class="button button-primary" value="Create Role">
+            <input type="submit" name="create_ediuser_role" class="button button-primary" value="Create Role">
         </form>
     </div>
     <?php
