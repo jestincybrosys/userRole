@@ -1,0 +1,71 @@
+.widefat {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+.widefat ul{
+    margin-top: 0px;
+}
+
+.widefat th {
+    background-color: #f0f0f0;
+    padding: 10px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.widefat th, .widefat td {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.widefat tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.widefat tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+
+.wrap {
+    margin: 20px;
+}
+
+.wrap h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: bold; /* This makes the heading bold */
+}
+
+
+label {
+    display: block;
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: 300px;
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.button-primary {
+    background-color: #0073e5;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button-primary:hover {
+    background-color: #005bb5;
+}
