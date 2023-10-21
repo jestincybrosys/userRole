@@ -104,10 +104,10 @@ function ediuser_role_editor_page() {
             
             <input type="submit" name="create_ediuser_role" class="button button-primary" value="Create Role">
         </form>
-    </div>
+    </div> 
     <?php
 }
-
+ 
 
 
 function edit_roles_page() {
