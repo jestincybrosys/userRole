@@ -30,6 +30,7 @@ function checkCapabilities() {
     });
 }
 
+
 jQuery(document).ready(function($) {
     // Hide additional capabilities and show "Load More" link
     $('.capabilities-list').each(function() {
@@ -39,16 +40,13 @@ jQuery(document).ready(function($) {
             $(this).next('.load-more-link').show();
         }
 
-        // Add commas to all visible capabilities (excluding the last one)
-        var visibleCapabilities = $(this).find('span:visible');
-        visibleCapabilities.each(function(index) {
-            if (index < visibleCapabilities.length - 1) {
+        // Add commas only to the visible, listed capabilities
+        var capabilitySpans = $(this).find('span');
+        capabilitySpans.each(function(index) {
+            if (index < capabilitySpans.length - 1 && !$(this).hasClass('hidden-capability')) {
                 $(this).after(', ');
             }
         });
-
-        // Remove the last comma
-        visibleCapabilities.last().next().remove();
     });
 
     // Show additional capabilities when "Load More" is clicked
@@ -58,19 +56,9 @@ jQuery(document).ready(function($) {
         var hiddenCapabilities = capabilitiesList.children('.hidden-capability');
         hiddenCapabilities.show();
 
-        // Update commas for all visible capabilities
-        var visibleCapabilities = capabilitiesList.find('span:visible');
-        visibleCapabilities.each(function(index) {
-            if (index < visibleCapabilities.length - 1) {
-                // Add a comma
-                $(this).after(', ');
-            }
-        });
-
-        // Remove the last comma
-        visibleCapabilities.last().next().remove();
+        // Remove the last comma from the displayed capabilities
+        capabilitiesList.find('span:visible:last').next().remove();
 
         $(this).hide();
     });
 });
-
