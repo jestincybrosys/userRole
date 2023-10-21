@@ -143,6 +143,7 @@ function edit_roles_page() {
     $wp_roles = wp_roles();
 
     ?>
+    <div class="flexdiv">
     <div class="wrap">
         <h2>Edit User Role Capabilities</h2>
         <form method="post" action="">
@@ -203,7 +204,7 @@ function edit_roles_page() {
             </tbody>
         </table>
     </div>
-
+    </div>
 
     <?php
     // ...

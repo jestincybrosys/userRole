@@ -58,7 +58,7 @@ input[type="checkbox"] {
 }
 
 .button-primary {
-    background-color: #0073e5;
+    background-color: #0073e5; 
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -71,3 +71,6 @@ input[type="checkbox"] {
 }
 
 
+.flexdiv{
+    display: flex;
+}
