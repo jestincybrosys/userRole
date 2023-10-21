@@ -39,12 +39,26 @@ jQuery(document).ready(function($) {
         if (capabilities.length > 0) {
             $(this).next('.load-more-link').show();
         }
+
+        // Add commas only to the visible, listed capabilities
+        var capabilitySpans = $(this).find('span');
+        capabilitySpans.each(function(index) {
+            if (index < capabilitySpans.length - 1 && !$(this).hasClass('hidden-capability')) {
+                $(this).after(', ');
+            }
+        });
     });
 
     // Show additional capabilities when "Load More" is clicked
     $('.load-more-link').on('click', function(e) {
         e.preventDefault();
-        $(this).prev('.capabilities-list').children('.hidden-capability').show();
+        var capabilitiesList = $(this).prev('.capabilities-list');
+        var hiddenCapabilities = capabilitiesList.children('.hidden-capability');
+        hiddenCapabilities.show();
+
+        // Remove the last comma from the displayed capabilities
+        capabilitiesList.find('span:visible:last').next().remove();
+
         $(this).hide();
     });
 });
