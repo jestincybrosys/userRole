@@ -188,7 +188,7 @@ function edit_roles_page() {
                         if ($i >= 10) {
                             echo '<span class="hidden-capability">' . $capabilityKeys[$i] . ' </span> ';
                         } else {
-                            echo '<span>' . $capabilityKeys[$i] . '</span> ';
+                            echo '<span>' . $capabilityKeys[$i] . ' </span> ';
                         }
                     }
                     echo '</div>';
