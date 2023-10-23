@@ -34,6 +34,16 @@ function ediuser_role_editor_menu() {
         'existing-role-capabilities',
         'existing_role_capabilities_page'
     );
+        add_submenu_page(
+            'ediuser-role-editor',// Parent menu
+            'User Roles & Capabilities', // Page title
+            'User Roles & Capabilities', // Menu title
+            'manage_options', // Capability required to access
+            'user-roles-capabilities-submenu', // Menu slug
+            'display_user_roles_table' // Callback function to display the content
+        );
+ 
+    
 }
 add_action('admin_menu', 'ediuser_role_editor_menu');
 
@@ -316,6 +326,50 @@ function existing_role_capabilities_page() {
                     if (count($capabilityKeys) > 10) {
                         echo '<a class="load-more-link" href="#">Load More</a>';
                     }
+                    echo '</td>';
+                    echo '</tr>';
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+    <?php
+}
+function display_user_roles_table() {
+    $wp_roles = wp_roles();
+    $edit_page_url = admin_url('admin.php?page=your-edit-page'); // Replace 'your-edit-page' with the actual edit page URL
+    $delete_page_url = admin_url('admin.php?page=your-delete-page'); // Replace 'your-delete-page' with the actual delete page URL
+    $additional_action_url = admin_url('admin.php?page=your-additional-action'); // Replace 'your-additional-action' with the actual additional action page URL
+
+    ?>
+    <div class="wrap">
+        <h2>User Roles and Capabilities</h2>
+        <table class="widefat">
+            <thead>
+                <tr>
+                    <th>Role</th>
+                    <th>Users Assigned</th>
+                    <th>Total Capabilities Count</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($wp_roles->role_objects as $role_name => $role) {
+                    $capabilities = $role->capabilities;
+                    $user_count = count(get_users(['role' => $role_name]));
+                    $total_capabilities_count = count($capabilities);
+
+                    echo '<tr>';
+                    echo '<td>' . $role_name . '</td>';
+                    echo '<td>' . $user_count . '</td>';
+                    echo '<td>' . $total_capabilities_count . '</td>';
+                    echo '<td>';
+                    echo '<a href="' . $edit_page_url . '">Edit</a>';
+                    echo ' | ';
+                    echo '<a href="' . $delete_page_url . '">Delete</a>';
+                    echo ' | ';
+                    echo '<a href="' . $additional_action_url . '">Additional Action</a>';
                     echo '</td>';
                     echo '</tr>';
                 }
