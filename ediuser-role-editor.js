@@ -62,3 +62,20 @@ jQuery(document).ready(function($) {
         $(this).hide();
     });
 });
+
+jQuery(document).ready(function($) {
+    // Handle column toggling
+    $('#columns-toggle').change(function() {
+        var selectedColumns = $(this).val();
+        
+        // Hide all columns
+        $('table.widefat thead th').hide();
+        $('table.widefat tbody td').hide();
+        
+        // Show the selected columns
+        for (var i = 0; i < selectedColumns.length; i++) {
+            $('table.widefat thead th.' + selectedColumns[i]).show();
+            $('table.widefat tbody td.' + selectedColumns[i]).show();
+        }
+    });
+});

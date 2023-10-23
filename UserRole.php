@@ -337,20 +337,34 @@ function existing_role_capabilities_page() {
 }
 function display_user_roles_table() {
     $wp_roles = wp_roles();
-    $edit_page_url = admin_url('admin.php?page=your-edit-page'); // Replace 'your-edit-page' with the actual edit page URL
-    $delete_page_url = admin_url('admin.php?page=your-delete-page'); // Replace 'your-delete-page' with the actual delete page URL
-    $additional_action_url = admin_url('admin.php?page=your-additional-action'); // Replace 'your-additional-action' with the actual additional action page URL
-
+    $selected_columns = array('role', 'users', 'capabilities');
+    
+    if (isset($_POST['columns-toggle'])) {
+        $selected_columns = $_POST['columns-toggle'];
+    }
+    
     ?>
     <div class="wrap">
         <h2>User Roles and Capabilities</h2>
+        <div class="tablenav top">
+            <div class="alignleft actions">
+                <form method="post">
+                    <label for="columns-toggle">Show on screen</label>
+                    <select name="columns-toggle[]" id="columns-toggle" multiple>
+                        <option value="role" <?php if (in_array('role', $selected_columns)) echo 'selected'; ?>>Role</option>
+                        <option value="users" <?php if (in_array('users', $selected_columns)) echo 'selected'; ?>>Users Assigned</option>
+                        <option value="capabilities" <?php if (in_array('capabilities', $selected_columns)) echo 'selected'; ?>>Total Capabilities Count</option>
+                    </select>
+                    <input type="submit" class="button" value="Apply">
+                </form>
+            </div>
+        </div>
         <table class="widefat">
             <thead>
                 <tr>
-                    <th>Role</th>
-                    <th>Users Assigned</th>
-                    <th>Total Capabilities Count</th>
-                    <th>Actions</th>
+                    <th class="role">Role</th>
+                    <th class="users">Users Assigned</th>
+                    <th class="capabilities">Total Capabilities Count</th>
                 </tr>
             </thead>
             <tbody>
@@ -361,16 +375,15 @@ function display_user_roles_table() {
                     $total_capabilities_count = count($capabilities);
 
                     echo '<tr>';
-                    echo '<td>' . $role_name . '</td>';
-                    echo '<td>' . $user_count . '</td>';
-                    echo '<td>' . $total_capabilities_count . '</td>';
-                    echo '<td>';
-                    echo '<a href="' . $edit_page_url . '">Edit</a>';
-                    echo ' | ';
-                    echo '<a href="' . $delete_page_url . '">Delete</a>';
-                    echo ' | ';
-                    echo '<a href="' . $additional_action_url . '">Additional Action</a>';
-                    echo '</td>';
+                    if (in_array('role', $selected_columns)) {
+                        echo '<td class="role">' . $role_name . '</td>';
+                    }
+                    if (in_array('users', $selected_columns)) {
+                        echo '<td class="users">' . $user_count . '</td>';
+                    }
+                    if (in_array('capabilities', $selected_columns)) {
+                        echo '<td class="capabilities">' . $total_capabilities_count . '</td>';
+                    }
                     echo '</tr>';
                 }
                 ?>
