@@ -1,5 +1,4 @@
 <?php
-
 function edit_roles_page() {
     $roles = get_editable_roles();
     $selected_role = "administrator"; // Default role
@@ -49,7 +48,18 @@ function edit_roles_page() {
 
             <h3>Current Role Capabilities</h3>
             <div id="current-capabilities">
-                <!-- The capabilities for the selected user role will be loaded here via AJAX -->
+                <?php
+                // Display the capabilities of the selected role for editing
+                if ($current_role) {
+                    $selected_capabilities = array_keys($current_role->capabilities);
+                    $all_capabilities = array_keys($all_capabilities);
+
+                    foreach ($all_capabilities as $capability) {
+                        $checked = in_array($capability, $selected_capabilities) ? 'checked' : '';
+                        echo '<label><input type="checkbox" name="capabilities[]" value="' . esc_attr($capability) . '" ' . $checked . '> ' . esc_html($capability) . '</label><br>';
+                    }
+                }
+                ?>
             </div>
             <br>
 
