@@ -50,36 +50,36 @@ function display_user_roles_table() {
                         <?php if (in_array('capabilities', $selected_columns)) { ?>
                             <th class="manage-column column-capabilities">Total Capabilities Count</th>
                         <?php } ?>
-                        <th class="manage-column column-actions">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="the-list">
-                    <?php
-                    foreach ($wp_roles->role_objects as $role_name => $role) {
-                        $capabilities = $role->capabilities;
-                        $user_count = count(get_users(['role' => $role_name]));
-                        $total_capabilities_count = count($capabilities);
+                <?php
+foreach ($wp_roles->role_objects as $role_name => $role) {
+    $capabilities = $role->capabilities;
+    $user_count = count(get_users(['role' => $role_name]));
+    $total_capabilities_count = count($capabilities);
 
-                        echo '<tr>';
-                        echo '<th class="check-column"><input type="checkbox" name="selected-roles[]" value="' . $role_name . '"></th>';
-                        if (in_array('role', $selected_columns)) {
-                            echo '<td class="role column-role" onmouseover="showEditButton(this)" onmouseout="hideEditButton(this)">';
-                            echo '<strong>' . ucfirst($role_name) . '</strong>';
-                            echo ' <a href="?page=edit-roles&role_name=' . $role_name . '&capabilities=' . urlencode(serialize($capabilities)) . '" class="edit-button">Edit</a>';
-                            echo '</td>';
-                        }
-                        if (in_array('users', $selected_columns)) {
-                            echo '<td class="users column-users">' . $user_count . '</td>';
-                        }
-                        if (in_array('capabilities', $selected_columns)) {
-                            echo '<td class="capabilities column-capabilities">' . $total_capabilities_count . '</td>';
-                        }
-                        echo '<td class="actions column-actions">';
-                        // Add other action links as needed
-                        echo '</td>';
-                        echo '</tr>';
-                    }
-                    ?>
+    echo '<tr>';
+    echo '<th class="check-column"><input type="checkbox" name="selected-roles[]" value="' . $role_name . '"></th>';
+    if (in_array('role', $selected_columns)) {
+        echo '<td class="role column-role" onmouseover="showEditButton(this)" onmouseout="hideEditButton(this)">';
+        echo '<strong>' . ucfirst($role_name) . '</strong>';
+        echo '<br>';
+        echo ' <a href="?page=edit-roles&role_name=' . $role_name . '&capabilities=' . urlencode(serialize($capabilities)) . '" class="edit-button">Edit</a>';
+        echo '<br><a href="?page=edit-roles&role_name=' . $role_name . '&capabilities=' . urlencode(serialize($capabilities)) . '" class="edit-button">Edit</a>';
+        echo '</td>';
+    }
+    if (in_array('users', $selected_columns)) {
+        echo '<td class="users column-users">' . $user_count . '</td>';
+    }
+    if (in_array('capabilities', $selected_columns)) {
+        echo '<td class="capabilities column-capabilities">' . $total_capabilities_count . '</td>';
+    }
+    echo '</tr>';
+}
+?>
+
+
                 </tbody>
             </table>
             <input type="submit" class="button action" value="Apply">

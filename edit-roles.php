@@ -1,18 +1,11 @@
 <?php
-function edit_roles_page() {
+function ediuser_edit_roles_page() {
     $roles = get_editable_roles();
     $selected_role = "administrator"; // Default role
     $current_role = get_role($selected_role);
+    $selected_capabilities = array(); // Define it here
 
-    if (isset($_POST['role_name'])) {
-        $selected_role = sanitize_text_field($_POST['role_name']);
-        $current_role = get_role($selected_role);
-    } elseif (isset($_GET['role_name'])) {
-        $selected_role = sanitize_text_field($_GET['role_name']);
-        $current_role = get_role($selected_role);
-    }
-
-    $all_capabilities = get_role('administrator')->capabilities; // Define $all_capabilities here
+    // ... rest of your code ...
 
     if (isset($_POST['update_role_capabilities'])) {
         $role_name = sanitize_text_field($_POST['role_name']);
@@ -30,6 +23,24 @@ function edit_roles_page() {
     }
 
     $wp_roles = wp_roles();
+
+    // Define capability groups and assign capabilities to groups
+    $capability_groups = array(
+        'General' => array(
+            'edit_dashboard',
+            'edit_files',
+            'export',
+            // Add more capabilities...
+        ),
+        'Posts' => array(
+            'delete_others_posts',
+            'delete_posts',
+            'edit_others_posts',
+            'edit_posts',
+            // Add more capabilities...
+        ),
+        // Add more groups...
+    );
 
     ?>
     <div class="flexdiv">
@@ -49,15 +60,17 @@ function edit_roles_page() {
             <h3>Current Role Capabilities</h3>
             <div id="current-capabilities">
                 <?php
-                // Display the capabilities of the selected role for editing
-                if ($current_role) {
-                    $selected_capabilities = array_keys($current_role->capabilities);
-                    $all_capabilities = array_keys($all_capabilities);
+                // Display capabilities grouped by category
+                foreach ($capability_groups as $group_name => $group_capabilities) {
+                    echo '<h4>' . esc_html($group_name) . '</h4>';
+                    echo '<ul>';
 
-                    foreach ($all_capabilities as $capability) {
+                    foreach ($group_capabilities as $capability) {
                         $checked = in_array($capability, $selected_capabilities) ? 'checked' : '';
-                        echo '<label><input type="checkbox" name="capabilities[]" value="' . esc_attr($capability) . '" ' . $checked . '> ' . esc_html($capability) . '</label><br>';
+                        echo '<li><label><input type="checkbox" name="capabilities[]" value="' . esc_attr($capability) . '" ' . $checked . '> ' . esc_html($capability) . '</label></li>';
                     }
+
+                    echo '</ul>';
                 }
                 ?>
             </div>
@@ -67,59 +80,9 @@ function edit_roles_page() {
         </form>
     </div>
 
-    <div class="wrap">
-    <h2>Capabilities by Category</h2>
-    <table class="widefat">
-        <thead>
-            <tr>
-                <th>Category</th>
-                <th>Capabilities</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            global $wp_roles;
-            $capabilities_by_category = array();
-
-            foreach ($wp_roles->role_objects as $role_name => $role) {
-                $capabilities = $role->capabilities;
-                foreach ($capabilities as $capability => $value) {
-                    $category_found = false;
-                    // Check if this capability belongs to an existing category
-                    foreach ($capabilities_by_category as $category => $capabilityList) {
-                        if (in_array($capability, $capabilityList)) {
-                            $capabilities_by_category[$category][] = $capability;
-                            $category_found = true;
-                            break;
-                        }
-                    }
-                    // If not found in any category, create a new category with the capability
-                    if (!$category_found) {
-                        $capabilities_by_category[$capability] = [$capability];
-                    }
-                }
-            }
-
-            // Output the capabilities by category
-            foreach ($capabilities_by_category as $category => $capabilityList) {
-                echo '<tr>';
-                echo '<td>' . $category . '</td>';
-                echo '<td>';
-                echo '<div class="capabilities-list">';
-                foreach ($capabilityList as $capability) {
-                    echo '<span>' . $capability . ' </span>';
-                }
-                echo '</div>';
-                echo '</td>';
-                echo '</tr>';
-            }
-            ?>
-        </tbody>
-    </table>
-</div>
-
-    </div>
+        </div>
 
     <?php
     // ...
 }
+?>

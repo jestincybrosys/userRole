@@ -16,7 +16,7 @@ function ediuser_role_editor_menu() {
         'Edit Roles',
         'manage_options',
         'edit-roles',
-        'edit_roles_page'
+        'ediuser_edit_roles_page'
     );
 
     add_submenu_page(
