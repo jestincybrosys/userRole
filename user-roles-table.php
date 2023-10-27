@@ -26,7 +26,7 @@ function display_user_roles_table() {
         <h2>User Roles and Capabilities</h2>
 
         <!-- Button to Create a New Role -->
-        <a href="?page=ediuser-role-editor" class="button-prymary">New Role</a>
+        <a href="?page=ediuser-role-new" class="button-prymary">New Role</a>
 
         <form method="post">
             <div class="tablenav top">

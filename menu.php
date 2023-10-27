@@ -2,11 +2,11 @@
 // Add a menu item for the ediuser role editor
 function ediuser_role_editor_menu() {
     add_menu_page(
-        'Ediuser Role Editor',
-        'Ediuser: User Roles',
-        'manage_options',
-        'ediuser-role-editor',
-        'ediuser_role_editor_page'
+        'Ediuser Role Editor',// Parent menu
+        'Ediuser: User Roles', // Page title
+        'manage_options', // Capability required to access
+        'ediuser-role-editor', // Menu slug
+        'display_user_roles_table' // Callback function to display the content
     );
 
     // Add a sub-menu item to display existing roles
@@ -29,12 +29,13 @@ function ediuser_role_editor_menu() {
     );
 
     add_submenu_page(
-        'ediuser-role-editor',// Parent menu
-        'User Roles & Capabilities', // Page title
-        'User Roles & Capabilities', // Menu title
-        'manage_options', // Capability required to access
-        'user-roles-capabilities', // Menu slug
-        'display_user_roles_table' // Callback function to display the content
+        'Ediuser Role Editor',
+        'Ediuser:new User Roles',
+        'Ediuser:new User Roles',
+        'manage_options',
+        'ediuser-role-new',
+        'ediuser_role_editor_new_page'
+
     );
 }
 add_action('admin_menu', 'ediuser_role_editor_menu');

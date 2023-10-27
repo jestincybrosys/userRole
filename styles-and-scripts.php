@@ -8,7 +8,8 @@ function enqueue_ediuser_role_editor_styles() {
         $current_page === 'ediuser-role-editor' ||
         $current_page === 'edit-roles' ||
         $current_page === 'existing-role-capabilities' ||
-        $current_page === 'user-roles-capabilities'
+        $current_page === 'user-roles-capabilities' ||
+        $current_page === 'ediuser-role-new'
     ) {
         // Get the plugin directory path
         $plugin_dir = plugin_dir_path(__FILE__);

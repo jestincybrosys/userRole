@@ -1,6 +1,6 @@
 <?php
 // Code for creating custom user roles
-function ediuser_role_editor_page() {
+function ediuser_role_editor_new_page() {
     if (isset($_POST['create_ediuser_role'])) {
         $role_name = sanitize_text_field($_POST['role_name']);
         $selected_capabilities = isset($_POST['capabilities']) ? $_POST['capabilities'] : array();
