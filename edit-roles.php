@@ -5,8 +5,6 @@ function ediuser_edit_roles_page() {
     $current_role = get_role($selected_role);
     $selected_capabilities = array(); // Define it here
 
-    // ... rest of your code ...
-
     if (isset($_POST['update_role_capabilities'])) {
         $role_name = sanitize_text_field($_POST['role_name']);
         $selected_capabilities = isset($_POST['capabilities']) ? $_POST['capabilities'] : array();
@@ -17,6 +15,15 @@ function ediuser_edit_roles_page() {
 
         foreach ($selected_capabilities as $capability) {
             $role->add_cap($capability);
+        }
+
+        // Remove unselected capabilities
+        $all_capabilities = $role->capabilities;
+
+        foreach ($all_capabilities as $capability => $value) {
+            if (!in_array($capability, $selected_capabilities)) {
+                $role->remove_cap($capability);
+            }
         }
 
         echo '<div class="updated"><p>Role capabilities updated successfully.</p></div>';
@@ -43,7 +50,6 @@ function ediuser_edit_roles_page() {
     );
 
     ?>
-    <div class="flexdiv">
     <div class="wrap">
         <h2>Edit User Role Capabilities</h2>
         <form method="post" action="">
@@ -80,9 +86,6 @@ function ediuser_edit_roles_page() {
         </form>
     </div>
 
-        </div>
-
     <?php
-    // ...
 }
 ?>

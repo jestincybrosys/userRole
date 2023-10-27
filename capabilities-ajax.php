@@ -44,6 +44,15 @@ function update_role_capabilities_callback() {
             $role->add_cap($capability);
         }
 
+        // Remove unselected capabilities
+        $all_capabilities = $role->capabilities;
+
+        foreach ($all_capabilities as $capability => $value) {
+            if (!in_array($capability, $selected_capabilities)) {
+                $role->remove_cap($capability);
+            }
+        }
+
         // Respond with a success message if needed
         echo 'Role capabilities updated successfully.';
     }
