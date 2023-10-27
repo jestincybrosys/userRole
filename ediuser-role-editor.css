@@ -57,17 +57,24 @@ input[type="checkbox"] {
     margin-right: 5px;
 }
 
-.button-primary {
-    background-color: #0073e5; 
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
+.button-prymary {
+    color: #2a5595;
+    border-color: #3f77af;
+    padding: 5px;
+    border-radius: 5px;
     cursor: pointer;
+    text-decoration: none;
+    font-weight: bolder;
+    border-style:solid;
+    border-width:2px;
+    float: left;
 }
 
-.button-primary:hover {
-    background-color: #005bb5;
+.button-prymary:hover {
+    color: #063375;
+    border-color: #062f59;
+
+
 }
 
 /* 
@@ -77,4 +84,16 @@ input[type="checkbox"] {
 
 .pdtp-2{
     padding-top: 10px;
+}
+
+.edit-button {
+    display: none;
+}
+.pdtp-5{
+    padding-top: 5px;
+}
+
+.aligncenter{
+    margin-top:auto !important;
+    margin-bottom:auto !important;
 }

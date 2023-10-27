@@ -79,3 +79,14 @@ jQuery(document).ready(function($) {
         }
     });
 });
+
+
+function showEditButton(cell) {
+     var editButton = cell.querySelector('.edit-button');
+     editButton.style.display = 'inline';
+ }
+
+ function hideEditButton(cell) {
+     var editButton = cell.querySelector('.edit-button');
+     editButton.style.display = 'none';
+ }

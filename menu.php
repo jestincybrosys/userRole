@@ -33,7 +33,7 @@ function ediuser_role_editor_menu() {
         'User Roles & Capabilities', // Page title
         'User Roles & Capabilities', // Menu title
         'manage_options', // Capability required to access
-        'user-roles-capabilities-submenu', // Menu slug
+        'user-roles-capabilities', // Menu slug
         'display_user_roles_table' // Callback function to display the content
     );
 }

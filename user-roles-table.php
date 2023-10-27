@@ -26,7 +26,7 @@ function display_user_roles_table() {
         <h2>User Roles and Capabilities</h2>
 
         <!-- Button to Create a New Role -->
-        <a href="?page=ediuser-role-editor" class="button button-primary">Create New Role</a>
+        <a href="?page=ediuser-role-editor" class="button-prymary">New Role</a>
 
         <form method="post">
             <div class="tablenav top">
@@ -39,7 +39,6 @@ function display_user_roles_table() {
                     <input type="submit" class="button action" value="Apply">
                 </div>
                 <div class="alignright actions">
-                    <label for="table-search">Search:</label>
                     <input type="search" id="table-search" name="s" value="<?php echo isset($_POST['s']) ? esc_attr($_POST['s']) : ''; ?>">
                     <input type="submit" class="button" value="Search">
                 </div>
@@ -48,7 +47,7 @@ function display_user_roles_table() {
             <table class="wp-list-table widefat fixed striped">
                 <thead>
                     <tr>
-                        <th class="manage-column check-column"><input type="checkbox" id="select-all-rows"></th>
+                        <th class="check-column"><input type="checkbox" id="select-all-rows"></th>
                         <?php if (in_array('role', $selected_columns)) { ?>
                             <th class="manage-column column-role">Role</th>
                         <?php } ?>
@@ -98,25 +97,7 @@ function display_user_roles_table() {
                 </div>
         </form>
     </div>
-    <style>
-        .edit-button {
-            display: none;
-        }
-        .pdtp-5{
-            padding-top: 5px;
-        }
-    </style>
-    <script>
-       function showEditButton(cell) {
-            var editButton = cell.querySelector('.edit-button');
-            editButton.style.display = 'inline';
-        }
 
-        function hideEditButton(cell) {
-            var editButton = cell.querySelector('.edit-button');
-            editButton.style.display = 'none';
-        }
-    </script>
     <?php
 }
 
