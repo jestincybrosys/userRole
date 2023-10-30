@@ -21,3 +21,19 @@ function enqueue_ediuser_role_editor_styles() {
     }
 }
 add_action('admin_enqueue_scripts', 'enqueue_ediuser_role_editor_styles');
+
+
+
+
+function generateBulkActions($formId) {
+    ?>
+    <div class="alignleft actions">
+        <select name="bulk-action" id="<?php echo $formId; ?>-bulk-action">
+            <option value="">Bulk Actions</option>
+            <option value="delete">Delete</option>
+            <!-- Add more bulk actions as needed -->
+        </select>
+        <input type="submit" class="button action" value="Apply" id="<?php echo $formId; ?>-apply-button">
+    </div>
+    <?php
+}

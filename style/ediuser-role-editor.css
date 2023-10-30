@@ -89,6 +89,10 @@ input[type="checkbox"] {
 .edit-button {
     display: none;
 }
+.delete-button {
+    display: none;
+    color: rgb(171, 10, 10);
+}
 .pdtp-5{
     padding-top: 5px;
 }

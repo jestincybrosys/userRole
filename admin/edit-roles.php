@@ -5,6 +5,15 @@ function ediuser_edit_roles_page() {
     $current_role = get_role($selected_role);
     $selected_capabilities = array(); // Define it here
 
+
+    if (isset($_POST['role_name'])) {
+        $selected_role = sanitize_text_field($_POST['role_name']);
+        $current_role = get_role($selected_role);
+    } elseif (isset($_GET['role_name'])) {
+        $selected_role = sanitize_text_field($_GET['role_name']);
+        $current_role = get_role($selected_role);
+    }
+    
     if (isset($_POST['update_role_capabilities'])) {
         $role_name = sanitize_text_field($_POST['role_name']);
         $selected_capabilities = isset($_POST['capabilities']) ? $_POST['capabilities'] : array();
@@ -30,24 +39,6 @@ function ediuser_edit_roles_page() {
     }
 
     $wp_roles = wp_roles();
-
-    // Define capability groups and assign capabilities to groups
-    $capability_groups = array(
-        'General' => array(
-            'edit_dashboard',
-            'edit_files',
-            'export',
-            // Add more capabilities...
-        ),
-        'Posts' => array(
-            'delete_others_posts',
-            'delete_posts',
-            'edit_others_posts',
-            'edit_posts',
-            // Add more capabilities...
-        ),
-        // Add more groups...
-    );
 
     ?>
     <div class="wrap">

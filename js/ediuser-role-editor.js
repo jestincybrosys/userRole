@@ -90,3 +90,13 @@ function showEditButton(cell) {
      var editButton = cell.querySelector('.edit-button');
      editButton.style.display = 'none';
  }
+
+ function showDeleteButton(cell) {
+    var deleteButton = cell.querySelector('.delete-button');
+    deleteButton.style.display = 'inline';
+}
+
+function hideDeleteButton(cell) {
+    var deleteButton = cell.querySelector('.delete-button');
+    deleteButton.style.display = 'none';
+}

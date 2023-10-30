@@ -1,4 +1,5 @@
 <?php
+
 function display_user_roles_table() {
     $wp_roles = wp_roles();
     $selected_columns = array('role', 'users', 'capabilities');
@@ -20,6 +21,7 @@ function display_user_roles_table() {
             }
         }
     }
+
     
     ?>
     <div class="wrap">
@@ -30,15 +32,10 @@ function display_user_roles_table() {
 
         <form method="post">
             <div class="tablenav top">
-                <div class="alignleft actions">
-                    <select name="bulk-action" id="bulk-action">
-                        <option value="">Bulk Actions</option>
-                        <option value="delete">Delete</option>
-                        <!-- Add more bulk actions as needed -->
-                    </select>
-                    <input type="submit" class="button action" value="Apply">
-                </div>
-                <div class="alignright actions">
+                <?php
+                    generateBulkActions('my-form-1');
+                    ?>
+                    <div class="alignright actions">
                     <input type="search" id="table-search" name="s" value="<?php echo isset($_POST['s']) ? esc_attr($_POST['s']) : ''; ?>">
                     <input type="submit" class="button" value="Search">
                 </div>
@@ -87,14 +84,9 @@ function display_user_roles_table() {
                     ?>
                 </tbody>
             </table>
-            <div class="alignleft actions pdtp-5">
-                    <select name="bulk-action" id="bulk-action">
-                        <option value="">Bulk Actions</option>
-                        <option value="delete">Delete</option>
-                        <!-- Add more bulk actions as needed -->
-                    </select>
-                    <input type="submit" class="button action" value="Apply">
-                </div>
+            <?php
+generateBulkActions('my-form-2');
+?>
         </form>
     </div>
 
@@ -115,7 +107,7 @@ function delete_selected_role($role_name) {
 
     // Do not delete the default roles (Administrator, Editor, etc.)
     if (in_array($role_name, ['administrator', 'editor', 'author', 'contributor', 'subscriber'])) {
-        echo 'Cannot delete a default WordPress role: ' . $role_name;
+        echo '<div class="error"><p>Cannot delete a default WordPress role: ' . $role_name . '</p></div>';
         return;
     }
 
@@ -126,3 +118,5 @@ function delete_selected_role($role_name) {
         echo 'Failed to delete role: ' . $role_name;
     }
 }
+
+
