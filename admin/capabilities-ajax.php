@@ -88,6 +88,15 @@ function load_capabilities_callback() {
         // Add more groups as needed...
     );
 
+    // Create an array to store all capabilities not listed in the 'Custom' array
+$custom_capabilities = array();
+
+
+
+// Add the missing capabilities to the 'Custom' group
+$capability_groups['Custom'] = array_merge($capability_groups['Custom'], array_diff($custom_capabilities, $capability_groups['Custom']));
+
+
     // Retrieve the capabilities associated with the selected role
     $role = get_role($selected_role);
     $capabilities = $role->capabilities;
@@ -115,6 +124,7 @@ function load_capabilities_callback() {
         }
 
         $output .= '</ul>';
+        $output .= '<hr>';
     }
 
     echo $output;
@@ -122,6 +132,9 @@ function load_capabilities_callback() {
     // Don't forget to exit to avoid extra output
     wp_die();
 }
+
+
+
 
 
 add_action('wp_ajax_update_role_capabilities', 'update_role_capabilities_callback');
