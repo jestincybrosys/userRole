@@ -68,7 +68,7 @@ function display_user_roles_table() {
                             echo '<br>';
                             echo '<a href="?page=edit-roles&role_name=' . $role_name . '&capabilities=' . urlencode(serialize($capabilities)) . '" class="edit-button">Edit</a>';
                             echo '<span class="edit-button" > | </span>';
-                            echo '<a href="?page=delete_selected_role&role_name=' . $role_name . '" class="delete-button">Delete</a>';
+                            echo '<a href="javascript:void(0);" class="delete-button" onclick="confirmDelete(\'' . $role_name . '\')">Delete</a>';
                             echo '</td>';
                             
                         }
@@ -109,12 +109,35 @@ function delete_selected_role($role_name) {
         return;
     }
 
-    // Attempt to delete the role
-    if (remove_role($role_name)) {
-        echo 'Role deleted successfully: ' . $role_name;
-    } else {
-        echo 'Failed to delete role: ' . $role_name;
-    }
+    // Display a JavaScript confirmation message
+    echo '<script>
+        function confirmDelete(roleName) {
+            var confirmed = confirm("Are you sure you want to delete the role: " + roleName + " ?");
+            if (confirmed) {
+                // The user confirmed, proceed with the deletion
+                deleteRole(roleName);
+            }
+        }
+
+        function deleteRole(roleName) {
+            // Use an AJAX request to call the server-side function to remove the role
+            jQuery.ajax({
+                url: "?page=delete_selected_role&role_name=" + roleName,
+                method: "GET",
+                success: function (data) {
+                    // Display a success message or handle any other actions
+                    alert("Role deleted successfully: " + roleName);
+                    // Optionally, refresh the page or update the role list
+                    location.reload();
+                },
+                error: function (data) {
+                    // Handle errors or display an error message
+                    alert("Failed to delete role: " + roleName);
+                }
+            });
+        }
+    </script>';
 }
+
 
 

@@ -5,7 +5,6 @@ function ediuser_edit_roles_page() {
     $current_role = get_role($selected_role);
     $selected_capabilities = array(); // Define it here
 
-
     if (isset($_POST['role_name'])) {
         $selected_role = sanitize_text_field($_POST['role_name']);
         $current_role = get_role($selected_role);
@@ -13,7 +12,7 @@ function ediuser_edit_roles_page() {
         $selected_role = sanitize_text_field($_GET['role_name']);
         $current_role = get_role($selected_role);
     }
-    
+
     if (isset($_POST['update_role_capabilities'])) {
         $role_name = sanitize_text_field($_POST['role_name']);
         $selected_capabilities = isset($_POST['capabilities']) ? $_POST['capabilities'] : array();
@@ -40,6 +39,84 @@ function ediuser_edit_roles_page() {
 
     $wp_roles = wp_roles();
 
+    // Define capability groups and assign capabilities to groups
+    $capability_groups = array(
+        'General' => array(
+            'edit_dashboard',
+            'edit_files',
+            'export',
+            'import',
+            'manage_links',
+            'manage_options',
+            'moderate_comments',
+            'read',
+            'unfiltered_html',
+            'update_core',
+        ),
+        'Posts' => array(
+            'delete_others_posts',
+            'delete_posts',
+            'delete_private_posts',
+            'delete_published_posts',
+            'edit_others_posts',
+            'edit_posts',
+            'edit_private_posts',
+            'edit_published_posts',
+            'publish_posts',
+            'read_private_posts',
+        ),
+        'Pages' => array(
+            'delete_others_pages',
+            'delete_pages',
+            'delete_private_pages',
+            'delete_published_pages',
+            'edit_others_pages',
+            'edit_pages',
+            'edit_private_pages',
+            'edit_published_pages',
+            'publish_pages',
+            'read_private_pages',
+        ),
+        'Attachments' => array(
+            'upload_files',
+        ),
+        'Taxonomies' => array(
+            'manage_categories',
+        ),
+        'Themes' => array(
+            'delete_themes',
+            'edit_theme_options',
+            'edit_themes',
+            'install_themes',
+            'switch_themes',
+            'update_themes',
+        ),
+        'Plugins' => array(
+            'activate_plugins',
+            'delete_plugins',
+            'edit_plugins',
+            'install_plugins',
+            'update_plugins',
+        ),
+        'Users' => array(
+            'create_roles',
+            'create_users',
+            'delete_roles',
+            'delete_users',
+            'edit_roles',
+            'edit_users',
+            'list_roles',
+            'list_users',
+            'promote_users',
+            'remove_users',
+        ),
+        'Custom' => array(
+            'restrict_content',
+            // Add your custom capabilities here...
+        ),
+        // Add more groups as needed...
+    );
+
     ?>
     <div class="wrap">
         <h2>Edit User Role Capabilities</h2>
@@ -57,7 +134,7 @@ function ediuser_edit_roles_page() {
             <h3>Current Role Capabilities</h3>
             <div id="current-capabilities">
                 <?php
-                // Display capabilities grouped by category
+                // Loop through groups and capabilities
                 foreach ($capability_groups as $group_name => $group_capabilities) {
                     echo '<h4>' . esc_html($group_name) . '</h4>';
                     echo '<ul>';
@@ -76,7 +153,6 @@ function ediuser_edit_roles_page() {
             <input type="submit" name="update_role_capabilities" class="button button-primary" value="Update Role Capabilities">
         </form>
     </div>
-
     <?php
 }
 ?>

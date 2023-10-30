@@ -27,7 +27,7 @@ add_action('admin_enqueue_scripts', 'enqueue_ediuser_role_editor_styles');
 
 function generateBulkActions($formId) {
     ?>
-    <div class="alignleft actions">
+    <div class="alignleft actions pdtp-5">
         <select name="bulk-action" id="<?php echo $formId; ?>-bulk-action">
             <option value="">Bulk Actions</option>
             <option value="delete">Delete</option>
