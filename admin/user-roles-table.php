@@ -21,8 +21,7 @@ function display_user_roles_table() {
             }
         }
     }
-
-    
+   
     ?>
     <div class="wrap">
         <h2>User Roles and Capabilities</h2>
@@ -138,6 +137,4 @@ function delete_selected_role($role_name) {
         }
     </script>';
 }
-
-
 

@@ -39,8 +39,6 @@ function ediuser_edit_roles_page() {
 
     $wp_roles = wp_roles();
 
-   
-
     ?>
     <div class="wrap">
     <h2>Edit User Role Capabilities</h2>

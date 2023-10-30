@@ -8,7 +8,6 @@ function ediuser_role_editor_menu() {
         'ediuser-role-editor', // Menu slug
         'display_user_roles_table' // Callback function to display the content
     );
-
     // Add a sub-menu item to display existing roles
     add_submenu_page(
         'ediuser-role-editor',

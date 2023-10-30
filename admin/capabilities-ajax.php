@@ -134,9 +134,6 @@ $capability_groups['Custom'] = array_merge($capability_groups['Custom'], array_d
 }
 
 
-
-
-
 add_action('wp_ajax_update_role_capabilities', 'update_role_capabilities_callback');
 
 function update_role_capabilities_callback() {

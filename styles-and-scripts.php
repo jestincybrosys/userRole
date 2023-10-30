@@ -23,8 +23,6 @@ function enqueue_ediuser_role_editor_styles() {
 add_action('admin_enqueue_scripts', 'enqueue_ediuser_role_editor_styles');
 
 
-
-
 function generateBulkActions($formId) {
     ?>
     <div class="alignleft actions pdtp-5">

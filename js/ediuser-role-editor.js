@@ -47,7 +47,7 @@ jQuery(document).ready(function($) {
     // Trigger the change event when the page loads to initially load the capabilities
     $('#role_name').trigger('change');
 });
-
+ 
 function checkCapabilities(selectedRole) {
     var selectedCapabilities = jQuery('#current-capabilities').find('input[type="checkbox"]');
     var allCapabilities = jQuery('#all-capabilities').find('input[type="checkbox"]');
