@@ -32,9 +32,6 @@ function display_user_roles_table() {
 
         <form method="post">
             <div class="tablenav top">
-                <?php
-                    generateBulkActions('my-form-1');
-                    ?>
                     <div class="alignright actions">
                     <input type="search" id="table-search" name="s" value="<?php echo isset($_POST['s']) ? esc_attr($_POST['s']) : ''; ?>">
                     <input type="submit" class="button" value="Search">
@@ -66,12 +63,14 @@ function display_user_roles_table() {
                         echo '<tr>';
                         echo '<th class="check-column"><input type="checkbox" name="selected-roles[]" value="' . $role_name . '"></th>';
                         if (in_array('role', $selected_columns)) {
-                            echo '<td class="role column-role" onmouseover="showEditButton(this)" onmouseout="hideEditButton(this)">';
-                            echo '<strong>' . ucfirst($role_name) . '</strong>';
+                            echo '<td class="role column-role">';
+                            echo '<a href="?page=edit-roles&role_name=' . $role_name .'"><strong>' . ucfirst($role_name) . '</strong></a>';
                             echo '<br>';
-                            echo ' <a href="?page=edit-roles&role_name=' . $role_name . '&capabilities=' . urlencode(serialize($capabilities)) . '" class="edit-button">Edit</a>';
-                            echo '<br><a href="?page=edit-roles&role_name=' . $role_name . '&capabilities=' . urlencode(serialize($capabilities)) . '" class="edit-button">Edit</a>';
+                            echo '<a href="?page=edit-roles&role_name=' . $role_name . '&capabilities=' . urlencode(serialize($capabilities)) . '" class="edit-button">Edit</a>';
+                            echo '<span class="edit-button" > | </span>';
+                            echo '<a href="?page=delete_selected_role&role_name=' . $role_name . '" class="delete-button">Delete</a>';
                             echo '</td>';
+                            
                         }
                         if (in_array('users', $selected_columns)) {
                             echo '<td class="users column-users">' . $user_count . '</td>';
@@ -92,7 +91,6 @@ generateBulkActions('my-form-2');
 
     <?php
 }
-
 function delete_selected_role($role_name) {
     if (empty($role_name)) {
         // Role name is empty, do nothing

@@ -86,13 +86,19 @@ input[type="checkbox"] {
     padding-top: 10px;
 }
 
-.edit-button {
+/* Hide the edit and delete buttons by default */
+.edit-button, .delete-button {
     display: none;
 }
 .delete-button {
-    display: none;
-    color: rgb(171, 10, 10);
+    color: rgb(100, 0, 0);
 }
+
+/* Show the edit and delete buttons on hover */
+.role:hover .edit-button, .role:hover .delete-button {
+    display: inline;
+}
+
 .pdtp-5{
     padding-top: 5px;
 }
