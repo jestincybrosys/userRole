@@ -116,7 +116,7 @@ $capability_groups['Custom'] = array_merge($capability_groups['Custom'], array_d
     // Display the grouped capabilities as HTML
     $output = '';
     foreach ($grouped_capabilities as $group_name => $group) {
-        $output .= '<h4>' . esc_html($group_name) . '</h4>';
+        $output .= '<h3>' . esc_html($group_name) . '</h3>';
         $output .= '<ul>';
 
         foreach ($group as $capability => $value) {
