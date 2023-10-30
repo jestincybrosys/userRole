@@ -119,39 +119,28 @@ function ediuser_edit_roles_page() {
 
     ?>
     <div class="wrap">
-        <h2>Edit User Role Capabilities</h2>
-        <form method="post" action="">
-            <label for="role_name">Select Role to Edit:</label>
-            <select id="role_name" name="role_name">
-                <?php
-                foreach ($roles as $role_name => $role_info) {
-                    $selected = ($role_name === $selected_role) ? 'selected' : '';
-                    echo '<option value="' . esc_attr($role_name) . '" ' . $selected . '>' . esc_html($role_info['name']) . '</option>';
-                }
-                ?>
-            </select>
+    <h2>Edit User Role Capabilities</h2>
+<form method="post" action="">
+    <label for="role_name">Select Role to Edit:</label>
+    <select id="role_name" name="role_name">
+        <?php
+        foreach ($roles as $role_name => $role_info) {
+            $selected = ($role_name === $selected_role) ? 'selected' : '';
+            echo '<option value="' . esc_attr($role_name) . '" ' . $selected . '>' . esc_html($role_info['name']) . '</option>';
+        }
+        ?>
+    </select>
 
-            <h3>Current Role Capabilities</h3>
-            <div id="current-capabilities">
-                <?php
-                // Loop through groups and capabilities
-                foreach ($capability_groups as $group_name => $group_capabilities) {
-                    echo '<h4>' . esc_html($group_name) . '</h4>';
-                    echo '<ul>';
+    <h3>Current Role Capabilities</h3>
+    <div id="current-capabilities">
+        <!-- Capabilities will be loaded here via JavaScript -->
+    </div>
+    <br>
 
-                    foreach ($group_capabilities as $capability) {
-                        $checked = in_array($capability, $selected_capabilities) ? 'checked' : '';
-                        echo '<li><label><input type="checkbox" name="capabilities[]" value="' . esc_attr($capability) . '" ' . $checked . '> ' . esc_html($capability) . '</label></li>';
-                    }
+    <input type="submit" name="update_role_capabilities" class="button button-primary" value="Update Role Capabilities">
+</form>
 
-                    echo '</ul>';
-                }
-                ?>
-            </div>
-            <br>
 
-            <input type="submit" name="update_role_capabilities" class="button button-primary" value="Update Role Capabilities">
-        </form>
     </div>
     <?php
 }

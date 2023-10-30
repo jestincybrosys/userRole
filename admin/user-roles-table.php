@@ -84,8 +84,8 @@ function display_user_roles_table() {
                 </tbody>
             </table>
             <?php
-generateBulkActions('my-form-2');
-?>
+                generateBulkActions('my-form-2');
+                ?>
         </form>
     </div>
 

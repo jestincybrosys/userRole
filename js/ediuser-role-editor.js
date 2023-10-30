@@ -38,7 +38,6 @@ jQuery(document).ready(function($) {
             role_name: selectedRole
         }, function(response) {
             $('#current-capabilities').html(response);
-            checkCapabilities(); // Call the function to check capabilities
         });
     });
 
@@ -47,18 +46,20 @@ jQuery(document).ready(function($) {
 });
 
 function checkCapabilities() {
-    var selectedCapabilities = $('#current-capabilities').find('input[type="checkbox"]');
-    var allCapabilities = $('#all-capabilities').find('input[type="checkbox"]');
+    var selectedCapabilities = jQuery('#current-capabilities').find('input[type="checkbox"]');
+    var allCapabilities = jQuery('#all-capabilities').find('input[type="checkbox"]');
 
     // Uncheck all checkboxes
     allCapabilities.prop('checked', false);
 
     // Check only the selected user role's capabilities
     selectedCapabilities.each(function() {
-        var capabilityName = $(this).val();
+        var capabilityName = jQuery(this).val();
         allCapabilities.filter('[value="' + capabilityName + '"]').prop('checked', true);
     });
 }
+
+
 
 
 
