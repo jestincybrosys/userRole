@@ -151,7 +151,7 @@ function update_role_capabilities_callback() {
         foreach ($selected_capabilities as $capability) {
             $role->add_cap($capability);
         }
-
+ 
         // Remove unselected capabilities
         $all_capabilities = $role->capabilities;
 
