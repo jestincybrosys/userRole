@@ -18,18 +18,24 @@
     padding: 10px !important;
 }
 
-.widefat tr:nth-child(even) {
-    background-color: #f9f9f9;
+.column-role {
+    width: 60% !important;
 }
 
-.widefat tr:nth-child(odd) {
-    background-color: #fff;
+.column-users{
+    width: 20%;
+}
+
+.column-capabilities{
+    width: 20%;
 }
 
 .widefat th input{
     margin: 0;
+} 
+.aligncenter{
+    text-align: center;
 }
-
 .wrap {
     margin: 20px;
 }
@@ -75,8 +81,6 @@ input[type="checkbox"] {
 .button-prymary:hover {
     color: #063375;
     border-color: #062f59;
-
-
 }
 /* 
 .flexdiv{

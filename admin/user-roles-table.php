@@ -47,10 +47,10 @@ function display_user_roles_table() {
                             <th class="manage-column column-role">Role</th>
                         <?php } ?>
                         <?php if (in_array('users', $selected_columns)) { ?>
-                            <th class="manage-column column-users">Users Assigned</th>
+                            <th class="manage-column column-users " style="text-align: center;">Users</th>
                         <?php } ?>
                         <?php if (in_array('capabilities', $selected_columns)) { ?>
-                            <th class="manage-column column-capabilities">Total Capabilities Count</th>
+                            <th class="manage-column column-capabilities" style="text-align: center;">Capabilities</th>
                         <?php } ?>
                     </tr>
                 </thead>
@@ -78,11 +78,11 @@ function display_user_roles_table() {
                     }
                     
                     if (in_array('users', $selected_columns)) {
-                        echo '<td class="users column-users">' . $user_count . '</td>';
+                        echo '<td class="users column-users aligncenter">' . $user_count . '</td>';
                     }
                     
                     if (in_array('capabilities', $selected_columns)) {
-                        echo '<td class="capabilities column-capabilities">' . $total_capabilities_count . '</td>';
+                        echo '<td class="capabilities column-capabilities aligncenter">' . $total_capabilities_count . '</td>';
                     }
                     
                     echo '</tr>';
@@ -90,6 +90,20 @@ function display_user_roles_table() {
                 
                     ?>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th class="check-column"><input type="checkbox" id="select-all-rows"></th>
+                        <?php if (in_array('role', $selected_columns)) { ?>
+                            <th class="manage-column column-role">Role</th>
+                        <?php } ?>
+                        <?php if (in_array('users', $selected_columns)) { ?>
+                            <th class="manage-column column-users " style="text-align: center;">Users</th>
+                        <?php } ?>
+                        <?php if (in_array('capabilities', $selected_columns)) { ?>
+                            <th class="manage-column column-capabilities " style="text-align: center;">Capabilities</th>
+                        <?php } ?>
+                    </tr>
+                </tfoot>
             </table>
            
         </form>
