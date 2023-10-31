@@ -26,6 +26,9 @@
     background-color: #fff;
 }
 
+.widefat th input{
+    margin: 0;
+}
 
 .wrap {
     margin: 20px;

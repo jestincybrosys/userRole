@@ -53,7 +53,7 @@ function checkCapabilities(selectedRole) {
     var allCapabilities = jQuery('#all-capabilities').find('input[type="checkbox"]');
 
     // Uncheck all checkboxes  
-    allCapabilities.prop('checked', false);
+    allCapabilities.prop('checked', true);
 
     // Check only the selected user role's capabilities
     selectedCapabilities.each(function() {
