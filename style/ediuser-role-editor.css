@@ -120,20 +120,19 @@ input[type="checkbox"] {
 .tablenav-pages a {
     display: inline-block;
     margin: 0 5px;
-    padding: 3px 5px;
-    background-color: #337ab7;
-    color: #fff;
+    padding: 0px 3px;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 5px ;
+    border: 1px solid rgb(0, 140, 255);
+    color: #3f77af;
 }
 
 .tablenav-pages a:hover {
-    background-color: #235a92;
 }
 
 .tablenav-pages .current {
     background-color: #337ab7;
     color: #fff;
-    padding: 2px 5px;
+    padding: 1px 4px;
     border-radius: 4px;
 }

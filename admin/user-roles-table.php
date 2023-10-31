@@ -34,11 +34,11 @@ function display_user_roles_table() {
 
     ?>
     <div class="wrap">
-        <h2>User Roles and Capabilities</h2>
+        <h2>User Roles and Capabilities
 
         <!-- Button to Create a New Role -->
-        <a href="?page=ediuser-role-new" class="button-prymary">New Role</a>
-
+        <a href="?page=ediuser-role-new" class="page-title-action">New Role</a>
+        </h2>
         <form method="post">
             <div class="tablenav top">
                 <?php generateBulkActions('my-form-2'); ?>
