@@ -136,10 +136,55 @@ function hideDeleteButton(cell) {
     deleteButton.style.display = 'none';
 }
 
-function confirmDelete(roleName) {
-    var confirmMessage = "Are you sure you want to delete the role: " + roleName + "?";
-    if (confirm(confirmMessage)) {
-        // If the user confirms, proceed with the deletion
-        window.location.href = "?page=delete_selected_role&role_name=" + roleName;
-    }
-}
+
+
+
+    jQuery(document).ready(function ($) {
+        // Individual role deletion
+        $('.delete-role').on('click', function (e) {
+            e.preventDefault();
+            var role_name_to_delete = $(this).data('role');
+            if (confirm('Are you sure you want to delete ' + role_name_to_delete + '?')) {
+                // Perform the deletion using AJAX
+                $.post(ajaxurl, {
+                    action: 'delete_role',
+                    role_name: role_name_to_delete
+                }, function (response) {
+                    if (response === 'success') {
+                        alert('Role deleted successfully.');
+                        // Optionally, you can reload the page or update the role list here
+                        location.reload();
+                    } else {
+                        alert('Role deleted successfully.');
+
+                        location.reload();
+                    }
+                });
+            }
+        });
+
+        // Bulk role deletion
+        $('#<?php echo $formId; ?>-apply-button').on('click', function (e) {
+            e.preventDefault();
+            var selectedRoles = [];
+            $('.delete-role:checked').each(function () {
+                selectedRoles.push($(this).data('role'));
+            });
+
+            if (selectedRoles.length > 0 && confirm('Are you sure you want to delete the selected roles?')) {
+                // Perform the bulk deletion using AJAX
+                $.post(ajaxurl, {
+                    action: 'bulk_delete_roles',
+                    roles: selectedRoles
+                }, function (response) {
+                    if (response === 'success') {
+                        alert('Selected roles deleted successfully.');
+                        // Optionally, you can reload the page or update the role list here
+                        location.reload();
+                    } else {
+                        alert('Error deleting the selected roles.');
+                    }
+                });
+            }
+        });
+    });

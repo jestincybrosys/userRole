@@ -15,9 +15,8 @@ function display_user_roles_table() {
             // Handle delete action or show a message
             if (isset($_POST['selected-roles'])) {
                 foreach ($_POST['selected-roles'] as $role_name) {
-                    delete_selected_role($role_name);
+                    bulk_delete_roles_callback($role_name);
                 }
-                echo 'Selected Roles Deleted';
             }
         }
     }
@@ -31,6 +30,9 @@ function display_user_roles_table() {
 
         <form method="post">
             <div class="tablenav top">
+            <?php
+                generateBulkActions('my-form-2');
+                ?>
                     <div class="alignright actions">
                     <input type="search" id="table-search" name="s" value="<?php echo isset($_POST['s']) ? esc_attr($_POST['s']) : ''; ?>">
                     <input type="submit" class="button" value="Search">
@@ -54,87 +56,44 @@ function display_user_roles_table() {
                 </thead>
                 <tbody id="the-list">
                 <?php
-                    foreach ($wp_roles->role_objects as $role_name => $role) {
-                        $capabilities = $role->capabilities;
-                        $user_count = count(get_users(['role' => $role_name]));
-                        $total_capabilities_count = count($capabilities);
+                   foreach ($wp_roles->role_objects as $role_name => $role) {
+                    $capabilities = $role->capabilities;
+                    $user_count = count(get_users(['role' => $role_name]));
+                    $total_capabilities_count = count($capabilities);
+                
+                    echo '<tr>';
 
-                        echo '<tr>';
-                        echo '<th class="check-column"><input type="checkbox" name="selected-roles[]" value="' . $role_name . '"></th>';
-                        if (in_array('role', $selected_columns)) {
-                            echo '<td class="role column-role">';
-                            echo '<a href="?page=edit-roles&role_name=' . $role_name .'"><strong>' . ucfirst($role_name) . '</strong></a>';
-                            echo '<br>';
-                            echo '<a href="?page=edit-roles&role_name=' . $role_name . '&capabilities=' . urlencode(serialize($capabilities)) . '" class="edit-button">Edit</a>';
-                            echo '<span class="edit-button" > | </span>';
-                            echo '<a href="javascript:void(0);" class="delete-button" onclick="confirmDelete(\'' . $role_name . '\')">Delete</a>';
-                            echo '</td>';
-                            
-                        }
-                        if (in_array('users', $selected_columns)) {
-                            echo '<td class="users column-users">' . $user_count . '</td>';
-                        }
-                        if (in_array('capabilities', $selected_columns)) {
-                            echo '<td class="capabilities column-capabilities">' . $total_capabilities_count . '</td>';
-                        }
-                        echo '</tr>';
+                    echo '<th class="check-column"><input type="checkbox" name="selected-roles[]" class="delete-role" data-role="' . $role_name . '" value="' . $role_name . '"></th>';
+                    
+                    if (in_array('role', $selected_columns)) {
+                        echo '<td class="role column-role">';
+                        echo '<a href="?page=edit-roles&role_name=' . $role_name .'"><strong>' . ucfirst($role_name) . '</strong></a>';
+                        echo '<br>';
+                        echo '<a href="?page=edit-roles&role_name=' . $role_name . '&capabilities=' . urlencode(serialize($capabilities)) . '" class="edit-button">Edit</a>';
+                        
+                        // Add a delete button with JavaScript confirmation
+                        echo '<span class="edit-button"> | </span>';
+                        echo '<a href="#" class="delete-role delete-button" data-role="' . $role_name . '">Delete </a><br>';
+                        echo '</td>';
                     }
+                    
+                    if (in_array('users', $selected_columns)) {
+                        echo '<td class="users column-users">' . $user_count . '</td>';
+                    }
+                    
+                    if (in_array('capabilities', $selected_columns)) {
+                        echo '<td class="capabilities column-capabilities">' . $total_capabilities_count . '</td>';
+                    }
+                    
+                    echo '</tr>';
+                }
+                
                     ?>
                 </tbody>
             </table>
-            <?php
-                generateBulkActions('my-form-2');
-                ?>
+           
         </form>
     </div>
 
     <?php
 }
-function delete_selected_role($role_name) {
-    if (empty($role_name)) {
-        // Role name is empty, do nothing
-        return;
-    }
-
-    // Check if the role exists
-    if (!get_role($role_name)) {
-        echo 'Role does not exist: ' . $role_name;
-        return;
-    }
-
-    // Do not delete the default roles (Administrator, Editor, etc.)
-    if (in_array($role_name, ['administrator', 'editor', 'author', 'contributor', 'subscriber'])) {
-        echo '<div class="error"><p>Cannot delete a default WordPress role: ' . $role_name . '</p></div>';
-        return;
-    }
-
-    // Display a JavaScript confirmation message
-    echo '<script>
-        function confirmDelete(roleName) {
-            var confirmed = confirm("Are you sure you want to delete the role: " + roleName + " ?");
-            if (confirmed) {
-                // The user confirmed, proceed with the deletion
-                deleteRole(roleName);
-            }
-        }
-
-        function deleteRole(roleName) {
-            // Use an AJAX request to call the server-side function to remove the role
-            jQuery.ajax({
-                url: "?page=delete_selected_role&role_name=" + roleName,
-                method: "GET",
-                success: function (data) {
-                    // Display a success message or handle any other actions
-                    alert("Role deleted successfully: " + roleName);
-                    // Optionally, refresh the page or update the role list
-                    location.reload();
-                },
-                error: function (data) {
-                    // Handle errors or display an error message
-                    alert("Failed to delete role: " + roleName);
-                }
-            });
-        }
-    </script>';
-}
-

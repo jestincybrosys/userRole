@@ -42,25 +42,25 @@ function ediuser_edit_roles_page() {
     ?>
     <div class="wrap">
     <h2>Edit User Role Capabilities</h2>
-<form method="post" action="">
-    <label for="role_name">Select Role to Edit:</label>
-    <select id="role_name" name="role_name">
-        <?php
-        foreach ($roles as $role_name => $role_info) {
-            $selected = ($role_name === $selected_role) ? 'selected' : '';
-            echo '<option value="' . esc_attr($role_name) . '" ' . $selected . '>' . esc_html($role_info['name']) . '</option>';
-        }
-        ?>
-    </select>
+    <form method="post" action="">
+        <label for="role_name">Select Role to Edit:</label>
+        <select id="role_name" name="role_name">
+            <?php
+            foreach ($roles as $role_name => $role_info) {
+                $selected = ($role_name === $selected_role) ? 'selected' : '';
+                echo '<option value="' . esc_attr($role_name) . '" ' . $selected . '>' . esc_html($role_info['name']) . '</option>';
+            }
+            ?>
+        </select>
 
-    <h3>Current Role Capabilities</h3>
-    <div id="current-capabilities">
-        <!-- Capabilities will be loaded here via JavaScript -->
-    </div>
-    <br>
+        <h3>Current Role Capabilities</h3>
+        <div id="current-capabilities">
+            <!-- Capabilities will be loaded here via JavaScript -->
+        </div>
+        <br>
 
-    <input type="submit" name="update_role_capabilities" class="button button-primary" value="Update Role Capabilities">
-</form>
+        <input type="submit" name="update_role_capabilities" class="button button-primary" value="Update Role Capabilities">
+    </form>
 
 
     </div>

@@ -164,3 +164,49 @@ function update_role_capabilities_callback() {
 
     wp_die(); // Always use wp_die() at the end of AJAX callbacks.
 }
+
+
+
+// Define the AJAX action for individual role deletion
+add_action('wp_ajax_delete_role', 'delete_role_callback');
+add_action('wp_ajax_nopriv_delete_role', 'delete_role_callback'); // Allow non-logged-in users to use this action
+
+function delete_role_callback() {
+    $role_name = sanitize_text_field($_POST['role_name']);
+
+    if ($role_name === 'administrator') {
+        echo 'error';
+        exit;
+    }
+
+    if (remove_role($role_name)) {
+        echo 'success';
+        exit;
+    } else {
+        echo 'error';
+        exit;
+    }
+}
+
+// Define the AJAX action for bulk role deletion
+add_action('wp_ajax_bulk_delete_roles', 'bulk_delete_roles_callback');
+add_action('wp_ajax_nopriv_bulk_delete_roles', 'bulk_delete_roles_callback'); // Allow non-logged-in users to use this action
+
+function bulk_delete_roles_callback() {
+    $roles = $_POST['selected-roles'];
+    $success_count = 0;
+    $error_count = 0;
+
+    foreach ($roles as $role_name) {
+        if ($role_name !== 'administrator' && remove_role($role_name)) {
+            $success_count++;
+            echo '<div class="updated"><p>'. $role_name .' deleted successfully.</p></div>';
+
+        } else {
+            $error_count++;
+        }
+    }
+
+   
+}
+
