@@ -63,7 +63,7 @@ function display_user_roles_table() {
                 
                     echo '<tr>';
 
-                    echo '<th class="check-column"><input type="checkbox" name="selected-roles[]" class="delete-role" data-role="' . $role_name . '" value="' . $role_name . '"></th>';
+                    echo '<td class="check-column"><input type="checkbox" name="selected-roles[]" class="delete-role" data-role="' . $role_name . '" value="' . $role_name . '"></td>';
                     
                     if (in_array('role', $selected_columns)) {
                         echo '<td class="role column-role">';
