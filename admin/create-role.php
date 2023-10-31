@@ -27,7 +27,7 @@ function ediuser_role_editor_new_page() {
         <h2>Create Custom User Role</h2>
         <form method="post" action="">
             <label for="role_name">Role Name:</label>
-            <input type="text" id="role_name" name="role_name" required>
+            <input type="text" id="role_name" placeholder="Enter Role Name" name="role_name" required>
 
             <label style="margin-bottom: 20px;">Capabilities:</label>
             <div class="capability-list">

@@ -48,12 +48,12 @@ jQuery(document).ready(function($) {
     $('#role_name').trigger('change');
 });
  
-function checkCapabilities(selectedRole) {
+function checkCapabilities(_selectedRole) {
     var selectedCapabilities = jQuery('#current-capabilities').find('input[type="checkbox"]');
     var allCapabilities = jQuery('#all-capabilities').find('input[type="checkbox"]');
 
     // Uncheck all checkboxes  
-    allCapabilities.prop('checked', true);
+    allCapabilities.prop('checked', false);
 
     // Check only the selected user role's capabilities
     selectedCapabilities.each(function() {
@@ -164,27 +164,27 @@ function hideDeleteButton(cell) {
         });
 
         // Bulk role deletion
-        $('#<?php echo $formId; ?>-apply-button').on('click', function (e) {
-            e.preventDefault();
-            var selectedRoles = [];
-            $('.delete-role:checked').each(function () {
-                selectedRoles.push($(this).data('role'));
-            });
+        // $('#<?php echo $formId; ?>-apply-button').on('click', function (e) {
+        //     e.preventDefault();
+        //     var selectedRoles = [];
+        //     $('.delete-role:checked').each(function () {
+        //         selectedRoles.push($(this).data('role'));
+        //     });
 
-            if (selectedRoles.length > 0 && confirm('Are you sure you want to delete the selected roles?')) {
-                // Perform the bulk deletion using AJAX
-                $.post(ajaxurl, {
-                    action: 'bulk_delete_roles',
-                    roles: selectedRoles
-                }, function (response) {
-                    if (response === 'success') {
-                        alert('Selected roles deleted successfully.');
-                        // Optionally, you can reload the page or update the role list here
-                        location.reload();
-                    } else {
-                        alert('Error deleting the selected roles.');
-                    }
-                });
-            }
-        });
+        //     if (selectedRoles.length > 0 && confirm('Are you sure you want to delete the selected roles?')) {
+        //         // Perform the bulk deletion using AJAX
+        //         $.post(ajaxurl, {
+        //             action: 'bulk_delete_roles',
+        //             roles: selectedRoles
+        //         }, function (response) {
+        //             if (response === 'success') {
+        //                 alert('Selected roles deleted successfully.');
+        //                 // Optionally, you can reload the page or update the role list here
+        //                 location.reload();
+        //             } else {
+        //                 alert('Error deleting the selected roles.');
+        //             }
+        //         });
+        //     }
+        // });
     });
