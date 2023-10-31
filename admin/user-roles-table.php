@@ -5,7 +5,7 @@ function display_user_roles_table() {
     $selected_columns = array('role', 'users', 'capabilities');
 
     // Define the maximum number of roles to display
-    $max_roles_to_display = 5;
+    $max_roles_to_display = 6;
 
     if (isset($_POST['columns-toggle'])) {
         $selected_columns = $_POST['columns-toggle'];
@@ -24,7 +24,7 @@ function display_user_roles_table() {
         }
     }
 
-    $items_per_page = 5; // Number of items per page
+    $items_per_page = 6; // Number of items per page
     $current_page = isset($_GET['paged']) ? intval($_GET['paged']) : 1;
 
     $total_items = count($wp_roles->role_objects);
