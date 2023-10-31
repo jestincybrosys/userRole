@@ -112,3 +112,28 @@ input[type="checkbox"] {
     margin-top:auto !important;
     margin-bottom:auto !important;
 }
+
+.tablenav-pages {
+    margin-top: 20px;
+}
+
+.tablenav-pages a {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 4px 5px;
+    background-color: #337ab7;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.tablenav-pages a:hover {
+    background-color: #235a92;
+}
+
+.tablenav-pages .current {
+    background-color: #337ab7;
+    color: #fff;
+    padding: 2px 5px;
+    border-radius: 4px;
+}
