@@ -71,7 +71,6 @@ function display_user_roles_table() {
                         echo '<br>';
                         echo '<a href="?page=edit-roles&role_name=' . $role_name . '&capabilities=' . urlencode(serialize($capabilities)) . '" class="edit-button">Edit</a>';
                         
-                        // Add a delete button with JavaScript confirmation
                         echo '<span class="edit-button"> | </span>';
                         echo '<a href="#" class="delete-role delete-button" data-role="' . $role_name . '">Delete </a><br>';
                         echo '</td>';
