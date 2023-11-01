@@ -141,7 +141,7 @@ $capability_groups = array(
                     echo '<tr class="group-capabilities" data-group="' . esc_attr($group_name) . '" style="display:none">';
                     echo '<td class="group-name">' . esc_attr($label) .  '</td>';
                     echo '<td class="group-name">';
-                    echo '<input type="checkbox" name="capabilities[]" value=" '. esc_attr($cap) .'>">';
+                    echo '<input type="checkbox" name="capabilities[' . esc_attr($cap) . ']" value="' . esc_attr($cap) . '">';
                     echo '</td>';
                     echo '</tr>';
                 
