@@ -114,7 +114,6 @@ foreach ($capability_groups as $group_name => $group_capabilities) {
     $grouped_capabilities[$group_name] = array();
 
     foreach ($group_capabilities as $capability) {
-        // Remove underscores from capability names
         $capability = str_replace('_', ' ', $capability);
         $grouped_capabilities[$group_name][$capability] = in_array($capability, array_keys($capabilities));
     }
