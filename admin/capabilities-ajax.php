@@ -88,48 +88,106 @@ function load_capabilities_callback() {
         // Add more groups as needed...
     );
 
-    // Create an array to store all capabilities not listed in the 'Custom' array
-$custom_capabilities = array();
+// Retrieve the capabilities associated with the selected role
+$role = get_role($selected_role);
+$capabilities = $role->capabilities;
+$all_capabilities = get_role('administrator')->capabilities;
 
+// Group capabilities based on defined groups
+$grouped_capabilities = array();
+foreach ($capability_groups as $group_name => $group_capabilities) {
+    $grouped_capabilities[$group_name] = array();
 
-
-// Add the missing capabilities to the 'Custom' group
-$capability_groups['Custom'] = array_merge($capability_groups['Custom'], array_diff($custom_capabilities, $capability_groups['Custom']));
-
-
-    // Retrieve the capabilities associated with the selected role
-    $role = get_role($selected_role);
-    $capabilities = $role->capabilities;
-
-    // Group capabilities based on defined groups
-    $grouped_capabilities = array();
-    foreach ($capability_groups as $group_name => $group_capabilities) {
-        $grouped_capabilities[$group_name] = array();
-
-        foreach ($group_capabilities as $capability) {
-            if (array_key_exists($capability, $capabilities)) {
-                $grouped_capabilities[$group_name][$capability] = $capabilities[$capability];
-            }
-        }
+    foreach ($group_capabilities as $capability) {
+        $grouped_capabilities[$group_name][$capability] = in_array($capability, array_keys($capabilities));
     }
+}
 
-    // Display the grouped capabilities as HTML
-    $output = '';
-    foreach ($grouped_capabilities as $group_name => $group) {
-        $output .= '<h3>' . esc_html($group_name) . '</h3>';
-        $output .= '<ul>';
+// Retrieve the capabilities associated with the selected role
+$role = get_role($selected_role);
+$capabilities = $role->capabilities;
+$all_capabilities = get_role('administrator')->capabilities;
 
-        foreach ($group as $capability => $value) {
-            $output .= '<li><label><input type="checkbox" name="capabilities[]" value="' . esc_attr($capability) . '"> ' . esc_html($capability) . '</label></li>';
-        }
+// Group capabilities based on defined groups
+$grouped_capabilities = array();
+foreach ($capability_groups as $group_name => $group_capabilities) {
+    $grouped_capabilities[$group_name] = array();
 
-        $output .= '</ul>';
-        $output .= '<hr>';
+    foreach ($group_capabilities as $capability) {
+        // Remove underscores from capability names
+        $capability = str_replace('_', ' ', $capability);
+        $grouped_capabilities[$group_name][$capability] = in_array($capability, array_keys($capabilities));
     }
+}
 
-    echo $output;
 
-    // Don't forget to exit to avoid extra output
+// Display the grouped capabilities with a single main div
+$output = '<div class="capability-group-main">';
+
+// Display the group list on one side
+$output .= '<h3>Capability Groups</h3>';
+$output .='<div class="group-li">';
+$output .= '<div class="group-list">';
+
+$output .= '<ul class="group-list-ul">';
+foreach (array_keys($grouped_capabilities) as $group_name) {
+    $output .= '<li><a href="javascript:void(0);" class="toggle-group" data-group="' . esc_attr($group_name) . '">' . esc_html($group_name) . '</a></li>';
+}
+$output .= '</ul>';
+$output .= '</div>';
+
+// Display the selected group's capabilities on the other side
+$output .= '<div class="selected-group-capabilities">';
+$output .= '<table class="widefat striped tbl">';
+$output .= '<thead><tr><th>Capabilities</th><th>Grand</th></tr></thead>';
+$output .= '<tbody>';
+
+foreach ($grouped_capabilities as $group_name => $group) {
+    foreach ($group as $capability => $isPresent) {
+    $output .= '<tr class="group-capabilities" data-group="' . esc_attr($group_name) . '" style="display:none;">';
+
+    $output .= '<td class="group-name">';
+    
+    $output .='' . esc_html($capability) .'' ;
+    $output .= '</td>';
+    $output .= '<td class="group-name">';
+   
+        $checked = $isPresent ? 'checked' : '';
+        $output .= '<input type="checkbox" name="capabilities[]" value="' . esc_attr($capability) . '" ' . $checked . '>';
+   
+    $output .= '</td>';
+    }
+    $output .= '</tr>';
+}
+
+$output .= '</tbody>';
+$output .= '</table>';
+$output .='</div>';
+
+$output .= '</div>';
+$output .= '</div>';
+echo $output;
+?>
+
+<script>
+jQuery(document).ready(function($) {
+    // Default to showing the "General Group" capabilities when the page loads
+    var defaultGroup = "General";
+    $(".group-capabilities[data-group='" + defaultGroup + "']").show();
+
+    // Toggle group capabilities when clicking on group name
+    $(".toggle-group").on("click", function() {
+        var group = $(this).data("group");
+        $(".group-capabilities").hide();
+        $(".group-capabilities[data-group='" + group + "']").show();
+    });
+});
+
+</script>
+
+<?php
+
+
     wp_die();
 }
 

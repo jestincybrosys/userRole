@@ -6,9 +6,10 @@ function ediuser_role_editor_new_page() {
         $selected_capabilities = isset($_POST['capabilities']) ? $_POST['capabilities'] : array();
 
         // Get the full list of capabilities
-        $all_capabilities = get_role('administrator')->capabilities; // Use admin capabilities as a reference.
+        $all_capabilities = get_role('administrator')-> $capabilities; // Use admin capabilities as a reference.
 
         // Initialize an empty array for the role's capabilities
+        
         $role_capabilities = array();
 
         // Filter selected capabilities to ensure they are valid and add them to the role's capabilities array

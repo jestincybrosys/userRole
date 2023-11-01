@@ -40,6 +40,7 @@ function existing_role_capabilities_page() {
                 ?>
             </tbody>
         </table>
+     
     </div>
     <?php
 }

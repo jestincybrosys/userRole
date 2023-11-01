@@ -120,7 +120,7 @@ input[type="checkbox"] {
 .tablenav-pages a {
     display: inline-block;
     margin: 0 5px;
-    padding: 0px 3px;
+    padding: 0px 5px;
     text-decoration: none;
     border-radius: 5px ;
     border: 1px solid rgb(0, 140, 255);
@@ -133,6 +133,52 @@ input[type="checkbox"] {
 .tablenav-pages .current {
     background-color: #337ab7;
     color: #fff;
-    padding: 1px 4px;
+    padding: 0px 5px;
     border-radius: 4px;
+}
+.group-li{
+    display: flex;
+}
+.capability-group-main{
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid rgb(180, 180, 238);
+    min-height: 400px;
+}
+.group-list {
+    float: left;
+    width: 40%; /* Adjust the width as needed */
+}
+
+.group-list-ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+    width: 100%; /* Set the list width to 100% */
+}
+
+.group-list-ul li {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    font-weight: 600;
+}
+
+.group-list-ul li:last-child {
+    border-bottom: none; /* Remove border for the last item */
+}
+
+.group-list-ul a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+.tbl{
+    margin: 0;
+    width: 100%;
+}
+.selected-group-capabilities{
+    width: 100%;
 }
