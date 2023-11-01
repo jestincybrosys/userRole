@@ -188,3 +188,38 @@ function hideDeleteButton(cell) {
         //     }
         // });
     });
+
+
+    jQuery(document).ready(function($) {
+        // Default to showing the "General Group" capabilities when the page loads
+        var defaultGroup = "General";
+        $(".group-capabilities[data-group='" + defaultGroup + "']").show();
+        $(".group-list-ul li a[data-group='" + defaultGroup + "']").parent().addClass("active-group"); // Mark the default group as active
+    
+        // Toggle group capabilities when clicking on group name
+        $(".toggle-group").on("click", function() {
+            var group = $(this).data("group");
+            $(".group-capabilities").hide();
+            $(".group-capabilities[data-group='" + group + "']").show();
+            $(".group-list-ul li").removeClass("active-group");
+            $(this).parent().addClass("active-group"); // Mark the clicked group as active
+        });
+    });
+    
+
+    jQuery(document).ready(function($) {
+        // Default to showing the "General Group" capabilities when the page loads
+        var defaultGroup = "General";
+        $(".group-capabilities[data-group='" + defaultGroup + "']").show();
+        $(".group-list-ul li a[data-group='" + defaultGroup + "']").parent().addClass("active-group"); // Mark the default group as active
+    
+        // Toggle group capabilities when clicking on group name
+        $(".toggle-group").on("click", function() {
+            var group = $(this).data("group");
+            $(".group-capabilities").hide();
+            $(".group-capabilities[data-group='" + group + "']").show();
+            $(".group-list-ul li").removeClass("active-group");
+            $(this).parent().addClass("active-group"); // Mark the clicked group as active
+        });
+    });
+    

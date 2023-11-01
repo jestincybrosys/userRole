@@ -1,5 +1,4 @@
 <?php
-
 function display_user_roles_table() {
     $wp_roles = wp_roles();
     $selected_columns = array('role', 'users', 'capabilities');
@@ -37,9 +36,10 @@ function display_user_roles_table() {
         <h2>User Roles and Capabilities
 
         <!-- Button to Create a New Role -->
-        <a href="?page=ediuser-role-new" class="page-title-action">New Role</a>
-        </h2>
+        <a href="?page=ediuser-role-new" class="page-title-action">New Role</a></h2>
+
         <form method="post">
+            <input type="hidden" name="paged" value="<?php echo esc_attr($current_page); ?>">
             <div class="tablenav top">
                 <?php generateBulkActions('my-form-2'); ?>
                 <div class="alignright actions">
@@ -72,34 +72,40 @@ function display_user_roles_table() {
                     $user_count = count(get_users(['role' => $role_name]));
                     $total_capabilities_count = count($capabilities);
 
-                    echo '<tr>';
-                    echo '<td class="check-column"><input type="checkbox" name="selected-roles[]" class="delete-role" data-role="' . $role_name . '" value="' . $role_name . '"></td>';
+                    // Apply the search filter
+                    $search_query = isset($_POST['s']) ? sanitize_text_field($_POST['s']) : '';
 
-                    if (in_array('role', $selected_columns)) {
-                        echo '<td class="role column-role">';
-                        echo '<a href="?page=edit-roles&role_name=' . $role_name .'"><strong>' . ucfirst($role_name) . '</strong></a>';
-                        echo '<br>';
-                        echo '<a href="?page=edit-roles&role_name=' . $role_name . '&capabilities=' . urlencode(serialize($capabilities)) . '" class="edit-button">Edit</a>';
+                    // Check if the role name or capabilities contain the search query
+                    if (empty($search_query) || stripos($role_name, $search_query) !== false || stripos(serialize($capabilities), $search_query) !== false) {
+                        echo '<tr>';
+                        echo '<td class="check-column"><input type="checkbox" name="selected-roles[]" class="delete-role" data-role="' . $role_name . '" value="' . $role_name . '"></td>';
 
-                        // Add a delete button with JavaScript confirmation
-                        echo '<span class="edit-button"> | </span>';
-                        echo '<a href="#" class="delete-role delete-button" data-role="' . $role_name . '">Delete </a><br>';
-                        echo '</td>';
-                    }
+                        if (in_array('role', $selected_columns)) {
+                            echo '<td class="role column-role">';
+                            echo '<a href="?page=edit-roles&role_name=' . $role_name . '"><strong>' . ucfirst($role_name) . '</strong></a>';
+                            echo '<br>';
+                            echo '<a href="?page=edit-roles&role_name=' . $role_name . '&capabilities=' . urlencode(serialize($capabilities)) . '" class="edit-button">Edit</a>';
 
-                    if (in_array('users', $selected_columns)) {
-                        echo '<td class="users column-users aligncenter">' . $user_count . '</td>';
-                    }
+                            // Add a delete button with JavaScript confirmation
+                            echo '<span class="edit-button"> | </span>';
+                            echo '<a href="#" class="delete-role delete-button" data-role="' . $role_name . '">Delete</a><br>';
+                            echo '</td>';
+                        }
 
-                    if (in_array('capabilities', $selected_columns)) {
-                        echo '<td class="capabilities column-capabilities aligncenter">' . $total_capabilities_count . '</td>';
-                    }
+                        if (in_array('users', $selected_columns)) {
+                            echo '<td class="users column-users aligncenter">' . $user_count . '</td>';
+                        }
 
-                    echo '</tr>';
+                        if (in_array('capabilities', $selected_columns)) {
+                            echo '<td class="capabilities column-capabilities aligncenter">' . $total_capabilities_count . '</td>';
+                        }
 
-                    $counter++;
-                    if ($counter >= $max_roles_to_display) {
-                        break;
+                        echo '</tr>';
+
+                        $counter++;
+                        if ($counter >= $max_roles_to_display) {
+                            break;
+                        }
                     }
                 }
                 ?>
@@ -122,23 +128,22 @@ function display_user_roles_table() {
         </form>
 
         <?php
-       if ($total_pages > 1) {
-        echo '<div class="tablenav bottom">
+        if ($total_pages > 1) {
+            echo '<div class="tablenav bottom">
                 <div class="tablenav-pages">';
-        echo paginate_links(array(
-            'base' => add_query_arg('paged', '%#%'),
-            'format' => '',
-            'prev_text' => '&laquo;',
-            'next_text' => '&raquo;',
-            'total' => $total_pages,
-            'current' => $current_page,
-        ));
-        echo '</div>
+            echo paginate_links(array(
+                'base' => add_query_arg('paged', '%#%'),
+                'format' => '',
+                'prev_text' => '&laquo;',
+                'next_text' => '&raquo;',
+                'total' => $total_pages,
+                'current' => $current_page,
+            ));
+            echo '</div>
             </div>';
-    }
-    
+        }
         ?>
 
     </div>
-    <?php
+<?php
 }

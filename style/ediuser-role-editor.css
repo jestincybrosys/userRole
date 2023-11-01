@@ -96,7 +96,10 @@ input[type="checkbox"] {
     display: none;
 }
 .delete-button {
-    color: rgb(100, 0, 0);
+    color: rgb(150, 0, 0);
+}
+.delete-button:hover{
+    color: rgb(250, 0, 0);
 }
 
 /* Show the edit and delete buttons on hover */
@@ -138,6 +141,10 @@ input[type="checkbox"] {
 }
 .group-li{
     display: flex;
+}
+.group-name{
+    text-transform: capitalize;
+
 }
 .capability-group-main{
     background-color: #fff;
@@ -182,3 +189,12 @@ input[type="checkbox"] {
 .selected-group-capabilities{
     width: 100%;
 }
+
+.group-list-ul .active-group a {
+    color: #5a8ebe; /* Change the color to your desired color */
+    font-weight: bold; /* Add emphasis to the active group */
+}
+.group-list-ul li.active-group a {
+    font-weight: bold; /* You can customize this as needed */
+    color: #5a8ebe; /* You can choose a color that fits your design */
+  }

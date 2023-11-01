@@ -41,7 +41,7 @@ function ediuser_edit_roles_page() {
 
     ?>
     <div class="wrap">
-    <h2>Edit User Role Capabilities</h2>
+    <h2>EdiUser Capabilities</h2>
     <form method="post" action="">
         <label for="role_name">Select Role to Edit:</label>
         <select id="role_name" name="role_name">
@@ -52,8 +52,7 @@ function ediuser_edit_roles_page() {
             }
             ?>
         </select>
-
-        <h3>Current Role Capabilities</h3>
+            <h1></h1>
         <div id="current-capabilities">
             <!-- Capabilities will be loaded here via JavaScript -->
         </div>
@@ -64,6 +63,12 @@ function ediuser_edit_roles_page() {
 
 
     </div>
+    <script>
+
+
+
+</script>
+
     <?php
 }
 ?>
