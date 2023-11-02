@@ -1,6 +1,4 @@
 <?php
-
-
 function define_capability_groups() {
     $capability_groups = array(
         'General' => array(
@@ -136,24 +134,29 @@ function define_capability_groups() {
     }
 
     $administrator_capabilities = get_role('administrator')->capabilities;
-
-    // Initialize an empty array to store the "Others" group capabilities
+    // Initialize an empty "Others" group.
     $others_capabilities = array();
-    
-    // Iterate through the defined capability groups
+    print_r($administrator_capabilities);
+
+    // Iterate through the defined capability groups.
     foreach ($capability_groups as $group_name => $group_capabilities) {
-        // Compare the "Others" group capabilities with the group capabilities
-        $others_capabilities = array_diff($others_capabilities, array_keys($group_capabilities));
+        // Compare the administrator capabilities with the group capabilities.
+        $missing_capabilities = array_diff(array_keys($administrator_capabilities), array_keys($group_capabilities));
+        // Add missing capabilities to the "Others" group.
+        print_r($group_capabilities);
+
     }
-    
-    // Add the "Others" group with non-conflicting capabilities
-    $capability_groups['Others'] = array_combine($others_capabilities, $others_capabilities);
-    
-    // Output the updated $capability_groups
-    print_r($capability_groups);
-    
-    
+    $others_capabilities = array_merge($others_capabilities, $missing_capabilities);
+
+    print_r($missing_capabilities);
+    print_r($others_capabilities);
+
+    // Remove capabilities that were added to the "Others" group from the administrator capabilities.
+    $administrator_capabilities = array_diff_key($administrator_capabilities, $others_capabilities);
+    // Add the "Others" group with the remaining capabilities.
+    if (!empty($others_capabilities)) {
+        $capability_groups['All'] = array_combine($others_capabilities, $others_capabilities);
+    }
     return $capability_groups;
 }
 
-// Call the function to get the capability groups

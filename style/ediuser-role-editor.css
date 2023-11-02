@@ -169,8 +169,9 @@ input[type="checkbox"] {
 
 .group-list-ul li {
     border-bottom: 1px solid #ccc;
-    padding: 10px;
+    padding: 10.55px;
     font-weight: 600;
+    margin-bottom: 0;
 }
 
 .group-list-ul li:last-child {

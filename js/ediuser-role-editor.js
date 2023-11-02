@@ -1,34 +1,3 @@
-// jQuery(document).ready(function($) {
-//     $('#role_name').change(function() {
-//         var selectedRole = $(this).val();
-
-//         $.post(ajaxurl, {
-//             action: 'load_capabilities',
-//             role_name: selectedRole
-//         }, function(response) {
-//             $('#current-capabilities').html(response);
-//         });
-//     });
-
-//     // Trigger the change event when the page loads to initially load the capabilities
-//     $('#role_name').trigger('change');
-// });
-
-
-
-// function checkCapabilities() {
-//     var selectedCapabilities = $('#current-capabilities').find('input[type="checkbox"]');
-//     var allCapabilities = $('#all-capabilities').find('input[type="checkbox"]');
-
-//     // Uncheck all checkboxes
-//     allCapabilities.prop('checked', false);
-
-//     // Check only the selected user role's capabilities
-//     selectedCapabilities.each(function() {
-//         var capabilityName = $(this).val();
-//         allCapabilities.filter('[value="' + capabilityName + '"]').prop('checked', true);
-//     });
-// }
 jQuery(document).ready(function($) {
     $('#role_name').change(function() {
         var selectedRole = $(this).val();
@@ -61,9 +30,6 @@ function checkCapabilities(_selectedRole) {
         allCapabilities.filter('[value="' + capabilityName + '"]').prop('checked', true);
     });
 }
-
-
-
 
 
 jQuery(document).ready(function($) {
@@ -137,89 +103,44 @@ function hideDeleteButton(cell) {
 }
 
 
+jQuery(document).ready(function ($) {
+    // Individual role deletion
+    $('.delete-role').on('click', function (e) {
+        e.preventDefault();
+        var role_name_to_delete = $(this).data('role');
+        if (confirm('Are you sure you want to delete ' + role_name_to_delete + '?')) {
+            // Perform the deletion using AJAX
+            $.post(ajaxurl, {
+                action: 'delete_role',
+                role_name: role_name_to_delete
+            }, function (response) {
+                if (response === 'success') {
+                    alert('Role deleted successfully.');
+                    // Optionally, you can reload the page or update the role list here
+                    location.reload();
+                } else {
+                    alert('Role deleted successfully.');
 
-
-    jQuery(document).ready(function ($) {
-        // Individual role deletion
-        $('.delete-role').on('click', function (e) {
-            e.preventDefault();
-            var role_name_to_delete = $(this).data('role');
-            if (confirm('Are you sure you want to delete ' + role_name_to_delete + '?')) {
-                // Perform the deletion using AJAX
-                $.post(ajaxurl, {
-                    action: 'delete_role',
-                    role_name: role_name_to_delete
-                }, function (response) {
-                    if (response === 'success') {
-                        alert('Role deleted successfully.');
-                        // Optionally, you can reload the page or update the role list here
-                        location.reload();
-                    } else {
-                        alert('Role deleted successfully.');
-
-                        location.reload();
-                    }
-                });
-            }
-        });
-
-        // Bulk role deletion
-        // $('#<?php echo $formId; ?>-apply-button').on('click', function (e) {
-        //     e.preventDefault();
-        //     var selectedRoles = [];
-        //     $('.delete-role:checked').each(function () {
-        //         selectedRoles.push($(this).data('role'));
-        //     });
-
-        //     if (selectedRoles.length > 0 && confirm('Are you sure you want to delete the selected roles?')) {
-        //         // Perform the bulk deletion using AJAX
-        //         $.post(ajaxurl, {
-        //             action: 'bulk_delete_roles',
-        //             roles: selectedRoles
-        //         }, function (response) {
-        //             if (response === 'success') {
-        //                 alert('Selected roles deleted successfully.');
-        //                 // Optionally, you can reload the page or update the role list here
-        //                 location.reload();
-        //             } else {
-        //                 alert('Error deleting the selected roles.');
-        //             }
-        //         });
-        //     }
-        // });
+                    location.reload();
+                }
+            });
+        }
     });
+});
 
 
-    jQuery(document).ready(function($) {
-        // Default to showing the "General Group" capabilities when the page loads
-        var defaultGroup = "General";
-        $(".group-capabilities[data-group='" + defaultGroup + "']").show();
-        $(".group-list-ul li a[data-group='" + defaultGroup + "']").parent().addClass("active-group"); // Mark the default group as active
-    
-        // Toggle group capabilities when clicking on group name
-        $(".toggle-group").on("click", function() {
-            var group = $(this).data("group");
-            $(".group-capabilities").hide();
-            $(".group-capabilities[data-group='" + group + "']").show();
-            $(".group-list-ul li").removeClass("active-group");
-            $(this).parent().addClass("active-group"); // Mark the clicked group as active
-        });
+jQuery(document).ready(function($) {
+    // Default to showing the "General Group" capabilities when the page loads
+    var defaultGroup = "General";
+    $(".group-capabilities[data-group='" + defaultGroup + "']").show();
+    $(".group-list-ul li a[data-group='" + defaultGroup + "']").parent().addClass("active-group"); // Mark the default group as active
+
+    // Toggle group capabilities when clicking on group name
+    $(".toggle-group").on("click", function() {
+        var group = $(this).data("group");
+        $(".group-capabilities").hide();
+        $(".group-capabilities[data-group='" + group + "']").show();
+        $(".group-list-ul li").removeClass("active-group");
+        $(this).parent().addClass("active-group"); // Mark the clicked group as active
     });
-    
-
-    jQuery(document).ready(function($) {
-        // Default to showing the "General Group" capabilities when the page loads
-        var defaultGroup = "General";
-        $(".group-capabilities[data-group='" + defaultGroup + "']").show();
-        $(".group-list-ul li a[data-group='" + defaultGroup + "']").parent().addClass("active-group"); // Mark the default group as active
-    
-        // Toggle group capabilities when clicking on group name
-        $(".toggle-group").on("click", function() {
-            var group = $(this).data("group");
-            $(".group-capabilities").hide();
-            $(".group-capabilities[data-group='" + group + "']").show();
-            $(".group-list-ul li").removeClass("active-group");
-            $(this).parent().addClass("active-group"); // Mark the clicked group as active
-        });
-    });
-    
+});
