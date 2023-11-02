@@ -1,4 +1,5 @@
 <?php
+require_once('capabilities.php');
 
 
 
@@ -11,83 +12,8 @@ function load_capabilities_callback() {
     $selected_role = sanitize_text_field($_POST['role_name']);
 
     // Define capability groups and assign capabilities to groups
-    $capability_groups = array(
-        'General' => array(
-            'edit_dashboard' => 'Edit Dashboard',
-            'edit_files' => 'Edit Files',
-            'export' => 'Export',
-            'import' => 'Import',
-            'manage_links' => 'Manage Links',
-            'manage_options' => 'Manage Options',
-            'moderate_comments' => 'Moderate Comments',
-            'read' => 'Read',
-            'unfiltered_html' => 'Unfiltered HTML',
-            'update_core' => 'Update Core',
-        ),
-        'Posts' => array(
-            'delete_others_posts' => "Delete Others' Posts",
-            'delete_posts' => 'Delete Posts',
-            'delete_private_posts' => 'Delete Private Posts',
-            'delete_published_posts' => 'Delete Published Posts',
-            'edit_others_posts' => "Edit Others' Posts",
-            'edit_posts' => 'Edit Posts',
-            'edit_private_posts' => 'Edit Private Posts',
-            'edit_published_posts' => 'Edit Published Posts',
-            'publish_posts' => 'Publish Posts',
-            'read_private_posts' => 'Read Private Posts',
-        ),
-        'Pages' => array(
-            'delete_others_pages' => "Delete Others' Pages",
-            'delete_pages' => 'Delete Pages',
-            'delete_private_pages' => 'Delete Private Pages',
-            'delete_published_pages' => 'Delete Published Pages',
-            'edit_others_pages' => "Edit Others' Pages",
-            'edit_pages' => 'Edit Pages',
-            'edit_private_pages' => 'Edit Private Pages',
-            'edit_published_pages' => 'Edit Published Pages',
-            'publish_pages' => 'Publish Pages',
-            'read_private_pages' => 'Read Private Pages',
-        ),
-        'Attachments' => array(
-            'upload_files' => 'Upload Files',
-        ),
-        'Taxonomies' => array(
-            'manage_categories' => 'Manage Categories',
-        ),
-        'Themes' => array(
-            'delete_themes' => 'Delete Themes',
-            'edit_theme_options' => 'Edit Theme Options',
-            'edit_themes' => 'Edit Themes',
-            'install_themes' => 'Install Themes',
-            'switch_themes' => 'Switch Themes',
-            'update_themes' => 'Update Themes',
-        ),
-        'Plugins' => array(
-            'activate_plugins' => 'Activate Plugins',
-            'delete_plugins' => 'Delete Plugins',
-            'edit_plugins' => 'Edit Plugins',
-            'install_plugins' => 'Install Plugins',
-            'update_plugins' => 'Update Plugins',
-        ),
-        'Users' => array(
-            'create_roles' => 'Create Roles',
-            'create_users' => 'Create Users',
-            'delete_roles' => 'Delete Roles',
-            'delete_users' => 'Delete Users',
-            'edit_roles' => 'Edit Roles',
-            'edit_users' => 'Edit Users',
-            'list_roles' => 'List Roles',
-            'list_users' => 'List Users',
-            'promote_users' => 'Promote Users',
-            'remove_users' => 'Remove Users',
-        ),
-        'Custom' => array(
-            'restrict_content' => 'Restrict Content',
-            // Add your custom capabilities here...
-        ),
-        // Add more groups as needed...
-    );
-    
+
+    $capability_groups = define_capability_groups();
 
     
     $role = get_role($selected_role);
@@ -132,10 +58,6 @@ function load_capabilities_callback() {
         foreach ($group as $capability => $data) {
             $output .= '<tr class="group-capabilities" data-group="' . esc_attr($group_name) . '" style="display:none;">';
 
-            // $output .= '<td class="group-name">';
-            // $output .= esc_html($capability);
-            // $output .= '</td>';
-            
             $output .= '<td class="group-name">';
             $output .= esc_html($data['label']);
             $output .= '</td>';
@@ -184,39 +106,6 @@ jQuery(document).ready(function($) {
 }
 
 
-// add_action('wp_ajax_update_role_capabilities', 'update_role_capabilities_callback');
-
-// function update_role_capabilities_callback() {
-//     if (isset($_POST['role_name']) && isset($_POST['capabilities'])) {
-//         $role_name = sanitize_text_field($_POST['role_name']);
-//         $selected_capabilities = $_POST['capabilities'];
-
-//         // Update the role's capabilities
-//         $role = get_role($role_name);
-//         $role->capabilities = array();
-
-//         foreach ($selected_capabilities as $capability) {
-//             $role->add_cap($capability);
-//         }
- 
-//         // Remove unselected capabilities
-//         $all_capabilities = $role->capabilities;
-
-//         foreach ($all_capabilities as $capability => $value) {
-//             if (!in_array($capability, $selected_capabilities)) {
-//                 $role->remove_cap($capability);
-//             }
-//         }
-
-//         // Respond with a success message if needed
-//         echo 'Role capabilities updated successfully.';
-//     }
-
-//     wp_die(); // Always use wp_die() at the end of AJAX callbacks.
-// }
-
-
-
 // Define the AJAX action for individual role deletion
 add_action('wp_ajax_delete_role', 'delete_role_callback');
 add_action('wp_ajax_nopriv_delete_role', 'delete_role_callback'); // Allow non-logged-in users to use this action
@@ -259,6 +148,4 @@ function bulk_delete_roles_callback() {
 
    
 }
-
-
 
