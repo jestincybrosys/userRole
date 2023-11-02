@@ -16,26 +16,35 @@ function ediuser_edit_roles_page() {
     if (isset($_POST['update_role_capabilities'])) {
         $role_name = sanitize_text_field($_POST['role_name']);
         $selected_capabilities = isset($_POST['capabilities']) ? $_POST['capabilities'] : array();
-
+    
         // Update the role's capabilities
         $role = get_role($role_name);
-        $role->capabilities = array();
-
+        
+        // Create an array to track capabilities to be removed
+        $capabilities_to_remove = array();
+    
+        // Identify capabilities to be removed
+        $existing_capabilities = $role->capabilities;
+        foreach ($existing_capabilities as $capability => $value) {
+            if (!in_array($capability, $selected_capabilities)) {
+                $capabilities_to_remove[] = $capability;
+            }
+        }
+    
+        // Remove capabilities marked for removal
+        foreach ($capabilities_to_remove as $capability) {
+            $role->remove_cap($capability);
+        }
+    
+        // Add newly selected capabilities
         foreach ($selected_capabilities as $capability) {
             $role->add_cap($capability);
         }
-
-        // Remove unselected capabilities
-        $all_capabilities = $role->capabilities;
-
-        foreach ($all_capabilities as $capability => $value) {
-            if (!in_array($capability, $selected_capabilities)) {
-                $role->remove_cap($capability);
-            }
-        }
-
+    
         echo '<div class="updated"><p>Role capabilities updated successfully.</p></div>';
     }
+    
+    
 
     $wp_roles = wp_roles();
 
