@@ -1,12 +1,16 @@
 <?php
 // Add a menu item for the ediuser role editor
 function ediuser_role_editor_menu() {
+    $menu_icon_url = plugin_dir_url(__FILE__) . 'assets/EdiUser.png'; // Replace with your logo image URL
+
     add_menu_page(
         'Ediuser Role Editor',// Parent menu
         'Ediuser: User Roles', // Page title
         'manage_options', // Capability required to access
         'ediuser-role-editor', // Menu slug
-        'display_user_roles_table' // Callback function to display the content
+        'display_user_roles_table' ,// Callback function to display the content
+        $menu_icon_url // Specify the URL of your logo image
+
     );
     // Add a sub-menu item to display existing roles
     add_submenu_page(
