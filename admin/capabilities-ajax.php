@@ -59,13 +59,13 @@ function load_capabilities_callback() {
             $output .= '<tr class="group-capabilities" data-group="' . esc_attr($group_name) . '" style="display:none;">';
 
             $output .= '<td class="group-name">';
-            $output .= esc_html($data['label']);
+            $output .= '<label for="' . esc_attr($capability) . '">' . esc_html($data['label']) . '</label>';
             $output .= '</td>';
-
+            
             $output .= '<td class="group-name">';
             $checked = $data['isPresent'] ? 'checked' : '';
-            $output .= '<input type="checkbox" name="capabilities[]" class="' . esc_attr($capability) . '" value="' . esc_attr($capability) . '" ' . $checked . '>';
-            $output .= '</td>';
+            $output .= '<input type="checkbox" id="' . esc_attr($capability) . '" name="capabilities[]" class="' . esc_attr($capability) . '" value="' . esc_attr($capability) . '" ' . $checked . '>';
+            $output .= '</td>';            
         }
         $output .= '</tr>';
     }

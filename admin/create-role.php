@@ -66,9 +66,11 @@ $capability_groups = define_capability_groups();
             foreach ($capability_groups as $group_name => $group_capabilities) {
              foreach ($group_capabilities as $cap => $label) {
                     echo '<tr class="group-capabilities" data-group="' . esc_attr($group_name) . '" style="display:none">';
-                    echo '<td class="group-name">' . esc_attr($label) .  '</td>';
                     echo '<td class="group-name">';
-                    echo '<input type="checkbox" name="capabilities[' . esc_attr($cap) . ']" value="' . esc_attr($cap) . '">';
+                    echo '<label for="' . esc_attr($cap) . '">' . esc_html($label) . '</label>';
+                    echo '</td>';
+                    echo '<td class="group-name">';
+                    echo '<input type="checkbox" id="' . esc_attr($cap) . '" name="capabilities[' . esc_attr($cap) . ']" value="' . esc_attr($cap) . '">';
                     echo '</td>';
                     echo '</tr>';
                 

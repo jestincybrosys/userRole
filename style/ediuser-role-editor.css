@@ -164,7 +164,6 @@ input[type="checkbox"] {
 
 .group-list-ul li {
     border-bottom: 1px solid #ccc;
-    padding: 10.55px;
     font-weight: 600;
     margin-bottom: 0;
 }
@@ -174,6 +173,8 @@ input[type="checkbox"] {
 }
 
 .group-list-ul a {
+    padding: 10.55px;
+
     text-decoration: none;
     color: #333;
     display: block;
