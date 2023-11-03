@@ -22,7 +22,7 @@ function ediuser_edit_roles_page() {
         
         // Create an array to track capabilities to be removed
         $capabilities_to_remove = array();
-    
+    print_r($selected_capabilities);
         // Identify capabilities to be removed
         $existing_capabilities = $role->capabilities;
         foreach ($existing_capabilities as $capability => $value) {
@@ -30,20 +30,23 @@ function ediuser_edit_roles_page() {
                 $capabilities_to_remove[] = $capability;
             }
         }
+        
     
         // Remove capabilities marked for removal
         foreach ($capabilities_to_remove as $capability) {
             $role->remove_cap($capability);
         }
-    
+        print_r($capabilities_to_remove);
+
         // Add newly selected capabilities
         foreach ($selected_capabilities as $capability) {
             $role->add_cap($capability);
         }
-    
+        print_r($existing_capabilities);
+
         echo '<div class="updated"><p>Role capabilities updated successfully.</p></div>';
     }
-    
+
     
 
     $wp_roles = wp_roles();

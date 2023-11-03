@@ -64,7 +64,7 @@ function load_capabilities_callback() {
 
             $output .= '<td class="group-name">';
             $checked = $data['isPresent'] ? 'checked' : '';
-            $output .= '<input type="checkbox" name="capabilities[]" value="' . esc_attr($capability) . '" ' . $checked . '>';
+            $output .= '<input type="checkbox" name="capabilities[]" class="' . esc_attr($capability) . '" value="' . esc_attr($capability) . '" ' . $checked . '>';
             $output .= '</td>';
         }
         $output .= '</tr>';
@@ -97,7 +97,26 @@ jQuery(document).ready(function($) {
     });
 });
 
+// Add an event listener to all checkboxes
+var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+checkboxes.forEach(function(checkbox) {
+    checkbox.addEventListener('change', function() {
+        // Get the capability name from the clicked checkbox
+        var capabilityName = this.value;
+
+        // Find all checkboxes with the same capability name
+        var relatedCheckboxes = document.querySelectorAll('input[type="checkbox"][value="' + capabilityName + '"]');
+
+        // Update the state of related checkboxes
+        relatedCheckboxes.forEach(function(relatedCheckbox) {
+            relatedCheckbox.checked = this.checked;
+        }.bind(this));
+    });
+});
 </script>
+
+
+
 
 <?php
 
