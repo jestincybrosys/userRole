@@ -197,6 +197,7 @@ input[type="checkbox"] {
 .group-list-ul li.active-group a {
     font-weight: bold; /* You can customize this as needed */
     color: #5a8ebe; /* You can choose a color that fits your design */
+    background-color: #eaeaea;
   }
 
 .mt-5{

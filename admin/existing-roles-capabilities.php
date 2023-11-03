@@ -30,10 +30,6 @@ function existing_role_capabilities_page() {
                         }
                     }
                     echo '</div>';
-                    // Add "Load More" link if there are more than 10 capabilities
-                    if (count($capabilityKeys) > 10) {
-                        echo '<a class="load-more-link" href="#">Load More</a>';
-                    }
                     echo '</td>';
                     echo '</tr>';
                 }
@@ -44,3 +40,6 @@ function existing_role_capabilities_page() {
     </div>
     <?php
 }
+
+
+

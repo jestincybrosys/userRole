@@ -31,38 +31,44 @@ function checkCapabilities(_selectedRole) {
     });
 }
 
-
 jQuery(document).ready(function($) {
-    // Hide additional capabilities and show "Load More" link
-    $('.capabilities-list').each(function() {
-        var capabilities = $(this).children('.hidden-capability');
-        capabilities.hide();
-        if (capabilities.length > 0) {
-            $(this).next('.load-more-link').show();
-        }
+    // Function to add commas to a list of capabilities
+    function addCommasToCapabilities(capabilityList) {
+        var capabilitySpans = capabilityList.find('span');
+        var capabilities = [];
 
-        // Add commas only to the visible, listed capabilities
-        var capabilitySpans = $(this).find('span');
         capabilitySpans.each(function(index) {
-            if (index < capabilitySpans.length - 1 && !$(this).hasClass('hidden-capability')) {
-                $(this).after(', ');
+            capabilities.push($(this).text());
+
+            if (index < capabilitySpans.length - 1) {
+                capabilities.push(', ');
             }
         });
-    });
 
-    // Show additional capabilities when "Load More" is clicked
-    $('.load-more-link').on('click', function(e) {
-        e.preventDefault();
-        var capabilitiesList = $(this).prev('.capabilities-list');
+        capabilityList.text(capabilities.join(''));
+    }
+
+    // Hide additional capabilities and show "Load More" link for elements with hidden capabilities
+    $('.capabilities-list').each(function() {
+        var capabilitiesList = $(this);
         var hiddenCapabilities = capabilitiesList.children('.hidden-capability');
-        hiddenCapabilities.show();
-
-        // Remove the last comma from the displayed capabilities
-        capabilitiesList.find('span:visible:last').next().remove();
-
-        $(this).hide();
+        if (hiddenCapabilities.length > 0) {
+            hiddenCapabilities.hide();
+            var loadMoreLink = $('<br><a href="#" class="load-more-link">Load More</a>');
+            capabilitiesList.append(loadMoreLink);
+            loadMoreLink.on('click', function(e) {
+                e.preventDefault();
+                hiddenCapabilities.show();
+                addCommasToCapabilities(capabilitiesList);
+                loadMoreLink.remove();
+            });
+        } else {
+            addCommasToCapabilities(capabilitiesList);
+        }
     });
 });
+
+
 
 jQuery(document).ready(function($) {
     // Handle column toggling

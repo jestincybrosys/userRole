@@ -1,8 +1,5 @@
 <?php
 require_once('capabilities.php');
-
-
-
 // Define the AJAX handler for loading capabilities
 add_action('wp_ajax_load_capabilities', 'load_capabilities_callback');
 add_action('wp_ajax_nopriv_load_capabilities', 'load_capabilities_callback'); // Allow non-logged-in users to use this action
@@ -70,41 +67,18 @@ function load_capabilities_callback() {
         $output .= '</tr>';
     }
 
-    $output .= '</tbody>';
-    $output .= '</table>';
-    $output .='</div>';
-
-    $output .= '</div>';
-    $output .= '</div>';
-
+    $output .= '</tbody></table></div></div></div>';
     $user_count = isset(count_users()['avail_roles'][$selected_role]) ? count_users()['avail_roles'][$selected_role] : 0;
     $output .= '<div class=" role-div">';
     $output .= '<table class="widefat">';
-
     $output .= '<thead><tr><th>Role: ' . esc_html($role->name) . '</th></tr></thead>';
-    $output .= '<tr>';
-    $output .= '<td class="group-name">';
-    $output .= '<div class="flex">';
+    $output .= '<tr><td class="group-name"><div class="flex">';
     $output .= '<i class="dashicons dashicons-admin-users"></i>';
-    $output .= '<p>Users Count: ' . $user_count . '</p>';
-    $output .= '</div>';
-
-    $output .= '</td>';
-    $output .= '</tr>';
-    $output .= '<tr>';
-    $output .= '<td class="group-name">';
-    $output .= '<div class="flex">';
+    $output .= '<p>Users: ' . $user_count . '</p></div></td></tr>';
+    $output .= '<tr><td class="group-name"><div class="flex">';
     $output .= '<i class="dashicons dashicons-yes"></i>';
-    $output .= '<p>Granted: ' . count($role->capabilities) . '</p>';
-    $output .= '</div>';
-    $output .= '</td>';
-    $output .= '</tr>';
-    $output .= '<tr>';
-    $output .= '<td>';
-    $output .= '<input type="submit" name="update_role_capabilities" class="button button-primary" value="Update">';
-    $output .= '</td>';
-    $output .= '</div>';
-    $output .= '</div>';
+    $output .= '<p>Granted : ' . count($role->capabilities) . '</p></div></td></tr></div>';
+    $output .= '<tr><td><input type="submit" name="update_role_capabilities" class="button button-primary" value="Update"></td></div></div>';
     $output .= '</thody>';
     $output .= '</table>';
     
@@ -145,13 +119,7 @@ checkboxes.forEach(function(checkbox) {
     });
 });
 </script>
-
-
-
-
 <?php
-
-
     wp_die();
 }
 
@@ -195,7 +163,5 @@ function bulk_delete_roles_callback() {
             $error_count++;
         }
     }
-
-   
 }
 
