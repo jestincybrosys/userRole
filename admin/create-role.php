@@ -99,7 +99,7 @@ jQuery(document).ready(function($) {
 
 </script>
 
-            <input type="submit" name="create_ediuser_role" class="button button-primary" value="Create Role">
+            <input type="submit" name="create_ediuser_role" class="button button-primary mt-5" value="Create Role">
         </form>
     </div>
     <?php

@@ -199,3 +199,7 @@ input[type="checkbox"] {
     font-weight: bold; /* You can customize this as needed */
     color: #5a8ebe; /* You can choose a color that fits your design */
   }
+
+.mt-5{
+    margin-top: 10px !important;
+}
