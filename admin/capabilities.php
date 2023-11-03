@@ -156,6 +156,5 @@ function define_capability_groups() {
     if (!empty($others_capabilities)) {
         $capability_groups['All'] = array_combine($others_capabilities, $others_capabilities);
     }
-        print_r($capability_groups);
         return $capability_groups;
 }
