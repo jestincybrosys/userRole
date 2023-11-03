@@ -21,7 +21,7 @@ function ediuser_edit_roles_page() {
         $role = get_role($role_name);
         
         // Create an array to track capabilities to be removed
-        $capabilities_to_remove = array();
+        $capabilities_to_remove = array();  
         // Identify capabilities to be removed
         $existing_capabilities = $role->capabilities;
         foreach ($existing_capabilities as $capability => $value) {
@@ -30,7 +30,6 @@ function ediuser_edit_roles_page() {
             }
         }
         
-    
         // Remove capabilities marked for removal
         foreach ($capabilities_to_remove as $capability) {
             $role->remove_cap($capability);
@@ -44,39 +43,37 @@ function ediuser_edit_roles_page() {
         echo '<div class="updated"><p>Role capabilities updated successfully.</p></div>';
     }
 
-    
-
     $wp_roles = wp_roles();
 
     ?>
     <div class="wrap">
-    <h2>EdiUser: Edit Capabilities</h2>
-    <form method="post" action="">
-        <label for="role_name">Select Role to Edit:</label>
-        <select id="role_name" name="role_name">
-            <?php
-            foreach ($roles as $role_name => $role_info) {
-                $selected = ($role_name === $selected_role) ? 'selected' : '';
-                echo '<option value="' . esc_attr($role_name) . '" ' . $selected . '>' . esc_html($role_info['name']) . '</option>';
-            }
-            ?>
-        </select>
+
+        <h2>EdiUser: Edit Capabilities</h2>
+        <form method="post" action="">
+            <label for="role_name">Select Role to Edit:</label>
+            <select id="role_name" name="role_name">
+                <?php
+
+                foreach ($roles as $role_name => $role_info) {
+                    $selected = ($role_name === $selected_role) ? 'selected' : '';
+                    echo '<option value="' . esc_attr($role_name) . '" ' . $selected . '>' . esc_html($role_info['name']) . '</option>';
+                }
+                ?>
+            </select>
             <h1></h1>
-        <div id="current-capabilities">
-            <!-- Capabilities will be loaded here via JavaScript -->
-        </div>
-        <br>
-
-        <input type="submit" name="update_role_capabilities" class="button button-primary" value="Update Role Capabilities">
-    </form>
+            <div class="">
+                    <div id="current-capabilities" class="flex">
+                        
+                    </div>
 
 
+                </form>
+            
+               
     </div>
+        </div>
     <script>
-
-
-
-</script>
+    </script>
 
     <?php
 }

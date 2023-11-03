@@ -15,7 +15,7 @@ function ediuser_role_editor_new_page() {
         foreach ($selected_capabilities as $capability) {
             if (array_key_exists($capability, $all_capabilities)) {
                 $role_capabilities[$capability] = true;
-            }
+            }           
         }
 
         // Create the ediuser role.
@@ -26,7 +26,7 @@ function ediuser_role_editor_new_page() {
 $capability_groups = define_capability_groups();
 
 // Code for creating custom user roles
-
+    
     ?>
     <div class="wrap">
         <h2>EdiUser: Create User Role</h2>

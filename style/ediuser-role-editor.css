@@ -202,3 +202,33 @@ input[type="checkbox"] {
 .mt-5{
     margin-top: 10px !important;
 }
+
+.flex{
+    display: flex;
+}
+
+.table-hero{
+    width: 100%;
+}
+.flex p{
+    margin: 0px;
+}
+
+.role-div{
+    float: right; 
+    width: 30%; 
+    height: 200px; 
+    border-radius: 5px; 
+    padding: 0 10px
+}.role-div p,.role-div i{
+    padding: 5px;
+    margin: 0;
+}
+.role-div .widefat{
+    margin-top: 0;
+    padding-top: 0;
+    border-radius: 10px;
+}
+.role-div .widefat td p{
+    margin: 0;
+}
