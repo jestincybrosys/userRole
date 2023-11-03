@@ -33,7 +33,7 @@ function display_user_roles_table() {
 
     ?>
     <div class="wrap">
-        <h2>User Roles and Capabilities
+        <h2>EdiUser: Roles and Capabilities
 
         <!-- Button to Create a New Role -->
         <a href="?page=ediuser-role-new" class="page-title-action">New Role</a></h2>
@@ -51,7 +51,7 @@ function display_user_roles_table() {
             <table class="wp-list-table widefat fixed striped">
                 <thead>
                     <tr>
-                        <th class="check-column"><input type="checkbox" id="select-all-rows"></th>
+                        <th class="check-column"><input type="checkbox" id="select-all-rows-1"></th>
                         <?php if (in_array('role', $selected_columns)) { ?>
                             <th class="manage-column column-role">Role</th>
                         <?php } ?>
@@ -112,7 +112,7 @@ function display_user_roles_table() {
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th class="check-column"><input type="checkbox" id="select-all-rows"></th>
+                        <th class="check-column"><input type="checkbox" id="select-all-rows-2"></th>
                         <?php if (in_array('role', $selected_columns)) { ?>
                             <th class="manage-column column-role">Role</th>
                         <?php } ?>

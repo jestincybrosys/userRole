@@ -29,7 +29,7 @@ $capability_groups = define_capability_groups();
 
     ?>
     <div class="wrap">
-        <h2>Create Custom User Role</h2>
+        <h2>EdiUser: Create User Role</h2>
         <form method="post" action="">
             <label for="role_name">Role Name:</label>
             <input type="text" id="role_name" placeholder="Enter Role Name" name="role_name" required>

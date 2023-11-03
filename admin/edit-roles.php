@@ -50,7 +50,7 @@ function ediuser_edit_roles_page() {
 
     ?>
     <div class="wrap">
-    <h2>EdiUser Capabilities</h2>
+    <h2>EdiUser: Edit Capabilities</h2>
     <form method="post" action="">
         <label for="role_name">Select Role to Edit:</label>
         <select id="role_name" name="role_name">

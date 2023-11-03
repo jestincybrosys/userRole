@@ -5,7 +5,7 @@ function existing_role_capabilities_page() {
     $wp_roles = wp_roles();
     ?>
     <div class="wrap">
-        <h2>Existing User Roles and Capabilities</h2>
+        <h2>EdiUser: User Roles and Capabilities Overview</h2>
         <table class="widefat">
             <thead>
                 <tr>

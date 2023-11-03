@@ -3,6 +3,7 @@
     margin-top: 20px;
     border-collapse: collapse;
 }
+
 .widefat ul{
     margin-top: 0px;
 }
@@ -22,20 +23,18 @@
     width: 60% !important;
 }
 
-.column-users{
-    width: 20%;
-}
-
-.column-capabilities{
+.column-users,.column-capabilities{
     width: 20%;
 }
 
 .widefat th input{
     margin: 0;
 } 
+
 .aligncenter{
     text-align: center;
 }
+
 .wrap {
     margin: 20px;
 }
@@ -46,7 +45,6 @@
     font-weight: bold; /* This makes the heading bold */
 }
 
-
 label {
     display: block;
     margin: 5px 0;
@@ -55,7 +53,6 @@ label {
 
 input[type="text"] {
     width: 300px;
-    padding: 5px;
     margin-bottom: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -82,10 +79,6 @@ input[type="checkbox"] {
     color: #063375;
     border-color: #062f59;
 }
-/* 
-.flexdiv{
-    display: flex;
-} */
 
 .pdtp-2{
     padding-top: 10px;
@@ -95,9 +88,11 @@ input[type="checkbox"] {
 .edit-button, .delete-button {
     display: none;
 }
+
 .delete-button {
     color: rgb(150, 0, 0);
 }
+
 .delete-button:hover{
     color: rgb(250, 0, 0);
 }
@@ -130,22 +125,21 @@ input[type="checkbox"] {
     color: #3f77af;
 }
 
-.tablenav-pages a:hover {
-}
-
 .tablenav-pages .current {
     background-color: #337ab7;
     color: #fff;
     padding: 0px 5px;
     border-radius: 4px;
 }
+
 .group-li{
     display: flex;
 }
+
 .group-name{
     text-transform: capitalize;
-
 }
+
 .capability-group-main{
     background-color: #fff;
     padding: 10px;
@@ -153,6 +147,7 @@ input[type="checkbox"] {
     border: 2px solid rgb(180, 180, 238);
     min-height: 400px;
 }
+
 .group-list {
     float: left;
     width: 40%; /* Adjust the width as needed */
@@ -183,10 +178,12 @@ input[type="checkbox"] {
     color: #333;
     display: block;
 }
+
 .tbl{
     margin: 0;
     width: 100%;
 }
+
 .selected-group-capabilities{
     width: 100%;
 }
@@ -195,6 +192,7 @@ input[type="checkbox"] {
     color: #5a8ebe; /* Change the color to your desired color */
     font-weight: bold; /* Add emphasis to the active group */
 }
+
 .group-list-ul li.active-group a {
     font-weight: bold; /* You can customize this as needed */
     color: #5a8ebe; /* You can choose a color that fits your design */
