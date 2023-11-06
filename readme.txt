@@ -51,8 +51,10 @@ Yes, you can create custom user roles and assign specific capabilities to them u
 == Screenshots ==
 1. Plugins /assets/Screenshot-01.png
 2. New Role /assets/Screenshot-02.png
-3. Edit /assets/Screenshot-05.png
-4. OverView /assets/Screenshot-06.png
+3. with WooCommerce /assets/Screenshot-03.png
+4. with WooCommerce /assets/Screenshot-04.png
+5. Edit /assets/Screenshot-05.png
+6. OverView /assets/Screenshot-06.png
 
 == Changelog ==
 
