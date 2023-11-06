@@ -1,16 +1,16 @@
 <?php
 require_once('capabilities.php');
 // Define the AJAX handler for loading capabilities
-add_action('wp_ajax_load_capabilities', 'load_capabilities_callback');
-add_action('wp_ajax_nopriv_load_capabilities', 'load_capabilities_callback'); // Allow non-logged-in users to use this action
+add_action('wp_ajax_load_capabilities', 'ediuser_load_capabilities_callback');
+add_action('wp_ajax_nopriv_load_capabilities', 'ediuser_load_capabilities_callback'); // Allow non-logged-in users to use this action
 
-function load_capabilities_callback() {
+function ediuser_load_capabilities_callback() {
     // Get the selected role name from the AJAX request
     $selected_role = sanitize_text_field($_POST['role_name']);
 
     // Define capability groups and assign capabilities to groups
 
-    $capability_groups = define_capability_groups();
+    $capability_groups = ediuser_define_capability_groups();
 
     
     $role = get_role($selected_role);
@@ -125,10 +125,10 @@ checkboxes.forEach(function(checkbox) {
 
 
 // Define the AJAX action for individual role deletion
-add_action('wp_ajax_delete_role', 'delete_role_callback');
-add_action('wp_ajax_nopriv_delete_role', 'delete_role_callback'); // Allow non-logged-in users to use this action
+add_action('wp_ajax_delete_role', 'ediuser_delete_role_callback');
+add_action('wp_ajax_nopriv_delete_role', 'ediuser_delete_role_callback'); // Allow non-logged-in users to use this action
 
-function delete_role_callback() {
+function ediuser_delete_role_callback() {
     $role_name = sanitize_text_field($_POST['role_name']);
 
     if ($role_name === 'administrator') {
@@ -146,10 +146,10 @@ function delete_role_callback() {
 }
 
 // Define the AJAX action for bulk role deletion
-add_action('wp_ajax_bulk_delete_roles', 'bulk_delete_roles_callback');
-add_action('wp_ajax_nopriv_bulk_delete_roles', 'bulk_delete_roles_callback'); // Allow non-logged-in users to use this action
+add_action('wp_ajax_bulk_delete_roles', 'ediuser_bulk_delete_roles_callback');
+add_action('wp_ajax_nopriv_bulk_delete_roles', 'ediuser_bulk_delete_roles_callback'); // Allow non-logged-in users to use this action
 
-function bulk_delete_roles_callback() {
+function ediuser_bulk_delete_roles_callback() {
     $roles = $_POST['selected-roles'];
     $success_count = 0;
     $error_count = 0;

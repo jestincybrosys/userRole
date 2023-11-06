@@ -20,7 +20,7 @@ function ediuser_role_editor_menu() {
         'EdiUser', // Page title
         'manage_options', // Capability required to access
         'ediuser-role-editor', // Menu slug
-        'display_user_roles_table' ,// Callback function to display the content
+        'ediuser_display_user_roles_table' ,// Callback function to display the content
         'data:image/svg+xml;base64,' . base64_encode($menu_icon_svg) // Use inline SVG markup
 
     );
@@ -50,7 +50,7 @@ function ediuser_role_editor_menu() {
         'Role Overview',
         'manage_options',
         'existing-role-capabilities',
-        'existing_role_capabilities_page'
+        'ediuser_existing_role_capabilities_page'
     );
 
 

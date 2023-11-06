@@ -1,7 +1,7 @@
 <?php
 
 
-function define_capability_groups() {
+function ediuser_define_capability_groups() {
     $capability_groups = array(
         'General' => array(
             'edit_dashboard' => 'Edit Dashboard',

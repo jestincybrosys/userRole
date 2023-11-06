@@ -1,5 +1,5 @@
 <?php
-function display_user_roles_table() {
+function ediuser_display_user_roles_table() {
     $wp_roles = wp_roles();
     $selected_columns = array('role', 'users', 'capabilities');
 
@@ -17,7 +17,7 @@ function display_user_roles_table() {
             // Handle delete action or show a message
             if (isset($_POST['selected-roles'])) {
                 foreach ($_POST['selected-roles'] as $role_name) {
-                    bulk_delete_roles_callback($role_name);
+                    ediuser_bulk_delete_roles_callback($role_name);
                 }
             }
         }

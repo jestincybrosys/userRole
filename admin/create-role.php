@@ -23,7 +23,7 @@ function ediuser_role_editor_new_page() {
        echo ' <div class="updated"><p>ediuser role created successfully.</p></div>';
     }
 // Define capability groups and assign capabilities to groups
-$capability_groups = define_capability_groups();
+$capability_groups = ediuser_define_capability_groups();
 
 // Code for creating custom user roles
     

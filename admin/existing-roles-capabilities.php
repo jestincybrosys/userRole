@@ -1,7 +1,7 @@
 <?php
 
 
-function existing_role_capabilities_page() {
+function ediuser_existing_role_capabilities_page() {
     $wp_roles = wp_roles();
     ?>
     <div class="wrap">
