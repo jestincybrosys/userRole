@@ -29,7 +29,6 @@ Customize role names and capabilities.
 Assign or remove specific capabilities to user roles.
 Easily manage user permissions.
 Revoke or grant access to various WordPress features.
-Improve your website's security by fine-tuning user privileges.
 
 
 == Usage ==
