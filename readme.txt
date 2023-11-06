@@ -50,10 +50,10 @@ Can I create custom user roles with specific permissions?
 Yes, you can create custom user roles and assign specific capabilities to them using the EdiUser.
 
 == Screenshots ==
-1. Plugins /assets/Screenshot 1.png
-2. New Role /assets/Screenshot 2.png
-3. Edit /assets/Screenshot 5.png
-4. OverView /assets/Screenshot 6.png
+1. Plugins /assets/Screenshot-01.png
+2. New Role /assets/Screenshot-02.png
+3. Edit /assets/Screenshot-05.png
+4. OverView /assets/Screenshot-06.png
 
 == Changelog ==
 
